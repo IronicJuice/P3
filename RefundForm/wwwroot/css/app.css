@@ -4,12 +4,40 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+form {
+}
+
+h3 {
+    
+}
+
+p {
+    display: table-row;
+    height: 33px;
+}
+
+label {
+    display: table-cell;
+    width: 130px;
+    
+}
+
+input {
+    display: table-cell;
+}
+
 textarea {
     resize: none;
 }
 
 h1:focus {
     outline: none;
+}
+
+br {
+    content: "";
+    display: block;
+    margin-top: 0;
 }
 
 a, .btn-link {

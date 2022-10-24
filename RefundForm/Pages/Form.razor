@@ -8,24 +8,44 @@
   margin: auto;
 }
 </style>
+
+
 <body>
-
 <div class="content">
-  text here <br />
-  <input type="text" size="30" /><br />
+    <form>
+        <h3><nobr>Personlige oplysninger</nobr></h3>
+        <p>
+            <label>Navn:</label>
+            <input placeholder="" type="text" size="30" id="name"/><br />
+        </p>
+        <p>
+            <label>Telefon:</label>
+            <input placeholder="" type="text" size="30" id="phone"/><br />
+        </p>
+        <p>
+            <label>Email:</label>
+            <input placeholder="" type="text" size="30" id="email"/><br />
+        </p>
+        <h3>Udgiftens formål</h3>
+        <p>
+            <label>Gruppe:</label>
+                <select name="groups" id="group" style="width: 200px;">
+                <option>EDB</option>
+                <option>Silly</option>
+            </select><br>
+        </p>
+    </form>
+        
 
-  drop down here<br />
-  <select name="groups" id="group" width="30">
-      <option>EDB</option>
-      <option>Silly</option>
-  </select><br>
   
-  lots of text here <br />
-  <textarea rows="3" cols="30" ></textarea>
+        lots of text here <br />
+        <textarea rows="3" cols="30" ></textarea>
+
+
 </div>
 
 </body>
 
 @code{
-
+    
 }
