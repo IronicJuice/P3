@@ -20,7 +20,7 @@
         </p>
         <p>
             <label>Telefon:</label>
-            <input placeholder="" type="text" size="30" id="phone"/><br />
+            <input placeholder="" type="text" size="30" id="phone" inputmode="numeric"/><br />
         </p>
         <p>
             <label>Email:</label>
@@ -34,14 +34,31 @@
                 <option>Silly</option>
             </select><br>
         </p>
+        <p>
+            <label>Hvad er pengene brugt på:</label>
+            <input type="text" size="30" id="purpose" /><br />
+        </p>
+        <h3>OBS: Ved fortæring skal alle tilstedeværendes navn oplyses:</h3>
+        <textarea rows="3" cols="30"></textarea>
+        <h3>Postering</h3>
+        <p>
+            <label>Udgiftens størrelse:</label>
+            <input type="text" size="30" id="amount" inputmode="numeric"/><label>kr.</label>
+        </p>
+        <h3>Udbetaling</h3>
+        <p>
+            <label>Pengene er udbetalt kontant</label>
+            <input type="radio" name="account"/>
+        </p>
+        <p>
+            <label>Pengene overføres til konto</label>
+            <input type="radio" name="account"/>
+        </p>
+        <h3>Konto</h3>
+        Her skal være en løsning til valg af konto
+
+
     </form>
-        
-
-  
-        lots of text here <br />
-        <textarea rows="3" cols="30" ></textarea>
-
-
 </div>
 
 </body>
