@@ -4,6 +4,14 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+.eop{
+    height: 300px;
+}
+
+.spacer{
+    height: 25px;
+}
+
 form {
 }
 
@@ -18,7 +26,7 @@ p {
 
 label {
     display: table-cell;
-    width: 200px;
+    width: 210px;
     
 }
 

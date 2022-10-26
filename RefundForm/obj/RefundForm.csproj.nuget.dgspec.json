@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Marcus\\Source\\Repos\\IronicJuice\\P3\\RefundForm\\RefundForm.csproj": {}
+    "C:\\Users\\m\\source\\repos\\IronicJuice\\P3\\RefundForm\\RefundForm.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Marcus\\Source\\Repos\\IronicJuice\\P3\\RefundForm\\RefundForm.csproj": {
+    "C:\\Users\\m\\source\\repos\\IronicJuice\\P3\\RefundForm\\RefundForm.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Marcus\\Source\\Repos\\IronicJuice\\P3\\RefundForm\\RefundForm.csproj",
+        "projectUniqueName": "C:\\Users\\m\\source\\repos\\IronicJuice\\P3\\RefundForm\\RefundForm.csproj",
         "projectName": "RefundForm",
-        "projectPath": "C:\\Users\\Marcus\\Source\\Repos\\IronicJuice\\P3\\RefundForm\\RefundForm.csproj",
-        "packagesPath": "C:\\Users\\Marcus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Marcus\\Source\\Repos\\IronicJuice\\P3\\RefundForm\\obj\\",
+        "projectPath": "C:\\Users\\m\\source\\repos\\IronicJuice\\P3\\RefundForm\\RefundForm.csproj",
+        "packagesPath": "C:\\Users\\m\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\m\\source\\repos\\IronicJuice\\P3\\RefundForm\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Marcus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\m\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -66,12 +66,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
-              "version": "[6.0.10, 6.0.10]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
