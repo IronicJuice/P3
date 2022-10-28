@@ -4,7 +4,7 @@ namespace RefundForm
 {
     public class FormInfo
     {
-        public void testFunc()
+        public static void TestFunc()
         {
             Console.WriteLine("My god! It works!");
         }
