@@ -3,12 +3,13 @@ using Spire;
 using Spire.Pdf;
 using Spire.Pdf.Fields;
 using Spire.Pdf.Widget;
+using Reimbursement.Data;
 
 namespace Reimbursement.PdfData
 {
     public class PDF
     {
-        public void GenPdf()
+        public void GenPdf(FormInfo userInput)
         {
             //Create Pdf object
             PdfDocument doc = new PdfDocument();
@@ -31,72 +32,72 @@ namespace Reimbursement.PdfData
                     if (field.Name == "Name")
                     {
                         PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = "peter Weihe Magnussen";
+                        textBoxField.Text = userInput.Name;
                     }
                     if (field.Name == "TelefonNumber")
                     {
                         PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = "23366707";
+                        textBoxField.Text = userInput.Phone;
                     }
                     if (field.Name == "Email")
                     {
                         PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = "pmtv@student.aau.dk";
+                        textBoxField.Text = userInput.Email;
                     }
                     if (field.Name == "Group")
                     {
                         PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = "F-klubben";
+                        textBoxField.Text = userInput.Group;
                     }
                     if (field.Name == "MoneyUsagePurpose")
                     {
                         PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = "spise ude";
+                        textBoxField.Text = userInput.Purpose;
                     }
                     if (field.Name == "ConsumptionParticipats")
                     {
                         PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = "Markus, zoey, rasmus, christian";
+                        textBoxField.Text = userInput.ConsumptionParty;
                     }
                     if (field.Name == "ExpenseAmount")
                     {
                         PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = "649";
+                        textBoxField.Text = userInput.Amount;
                     }
                     if (field.Name == "PostingAccuntName")
                     {
                         PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = "spise";
+                        textBoxField.Text = "PlaceHolder";
                     }
                     if (field.Name == "PostingAccuntNumber")
                     {
                         PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = "91810005784";
+                        textBoxField.Text = "PlaceHolder";
                     }
                     if (field.Name == "TransferRegNumber")
                     {
                         PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = "9181";
+                        textBoxField.Text = "PlaceHolder";
                     }
                     if (field.Name == "AccountNumber")
                     {
                         PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = "00036784926";
+                        textBoxField.Text = "PlaceHolder";
                     }
                     if (field.Name == "Day")
                     {
                         PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = "02";
+                        textBoxField.Text = "PH";
                     }
                     if (field.Name == "Month")
                     {
                         PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = "10";
+                        textBoxField.Text = "PH";
                     }
                     if (field.Name == "Year")
                     {
                         PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = "2022";
+                        textBoxField.Text = "PH";
                     }
 
                 }
@@ -115,7 +116,7 @@ namespace Reimbursement.PdfData
                 }
 
             }
-            string PersonsName = "PeterWeihe";
+            string PersonsName = userInput.Name;
             doc.SaveToFile($"PdfData/{PersonsName}.pdf", FileFormat.PDF);
         }
     }

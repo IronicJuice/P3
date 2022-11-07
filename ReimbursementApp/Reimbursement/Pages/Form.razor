@@ -1,6 +1,7 @@
 ﻿@page "/form"
 @using Reimbursement.Data;
 @inject FormInfo formInfo
+@inject PdfData.PDF Pdf
 <PageTitle>Form</PageTitle>
 
 <style>
@@ -92,5 +93,6 @@
 @code{
     private void HandleValidSubmit() {
         Console.WriteLine(formInfo.Cash);
+        Pdf.GenPdf(formInfo);
     }
 }
