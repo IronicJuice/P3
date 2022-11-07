@@ -1,0 +1,96 @@
+﻿@page "/form"
+@using Reimbursement.Data;
+@inject FormInfo formInfo
+<PageTitle>Form</PageTitle>
+
+<style>
+.content {
+  max-width: 500px;
+  margin: auto;
+}
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        margin: 0;
+    }
+</style>
+
+<body>
+<div class="content">
+    <EditForm id="form" Model="@formInfo" OnValidSubmit="@HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <h3><nobr>Personlige oplysninger</nobr></h3>
+        <p>
+            <label>Navn:</label>
+            <InputText @bind-Value="formInfo.Name"/><br />
+        </p>
+        <p>
+            <label>Telefon:</label>
+            <InputText @bind-Value="formInfo.Phone" /><br />
+        </p>
+        <p>
+            <label>Email:</label>
+            <InputText @bind-Value="formInfo.Email" /><br />
+        </p>
+        <h3>Udgiftens formål</h3>
+        <p>
+            <label>Gruppe:</label>
+            <InputSelect @bind-Value="formInfo.Group" style="width: 200px;">
+            <option>EDB</option>
+            <option>Silly</option>
+            </InputSelect><br>
+        </p>
+        <p>
+            <label>Hvad er pengene brugt på:</label>
+            <InputText @bind-Value="formInfo.Purpose" /><br />
+        </p>
+        <h3>OBS: Ved fortæring skal alle tilstedeværendes navn oplyses:</h3>
+            <InputTextArea @bind-Value="formInfo.ConsumptionParty" rows="3" cols="30"></InputTextArea>
+        <h3>Postering</h3>
+        <p>
+            <label>Udgiftens størrelse:</label>
+            <nobr><InputText @bind-Value="formInfo.Amount" />kr.</nobr>
+        </p>
+        <h3>Udbetaling</h3>
+        <p>
+            <label>Pengene er udbetalt kontant</label>
+            <InputRadioGroup Name="CashOption" @bind-Value="formInfo.Cash">
+                <InputRadio Name="CashOption"  Value=true /> 
+            </InputRadioGroup>
+        </p>
+        <p>
+            <label>Pengene overføres til konto</label>
+            <InputRadioGroup Name="CashOption" @bind-Value="formInfo.Cash">
+                    <InputRadio Name="CashOption" Value=false />
+            </InputRadioGroup>
+        </p>
+        <h3>Konto</h3>
+
+        <input list="accountList" id="accountListInput" size="30" @bind-value="formInfo.Account">
+        <datalist id="accountList">
+            <option value="Skolemand: 47382"></option>
+            <option value="Stoerre heste inc.: 696911"></option>
+            <option value="18 store svedige maend: 1899902"></option>
+        </datalist>
+        <br />
+        <div class="spacer"></div>
+        <p>
+            <label>Vedhæft kvittering:</label>
+            <input type="file" multiple id="files" accept="image/*"  />
+        </p>
+        <div class="spacer"></div>
+        <div align="center"></div>
+    </EditForm>
+
+</div>
+<div class="eop"></div>
+</body>
+
+@code{
+    private void HandleValidSubmit() {
+        Console.WriteLine(formInfo.Cash);
+    }
+}
