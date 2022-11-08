@@ -55,6 +55,15 @@
             <label>Udgiftens størrelse:</label>
             <nobr><InputText @bind-Value="formInfo.Amount" />kr.</nobr>
         </p>
+        <p>
+            <label>Konto:</label>
+            <input list="accountList" id="accountListInput" size="30" @bind-value="formInfo.Account" align="right">
+            <datalist id="accountList">
+                <option value="Skolemand: 47382"></option>
+                <option value="Stoerre heste inc.: 696911"></option>
+                <option value="18 store svedige maend: 1899902"></option>
+            </datalist>
+        </p>
         <h3>Udbetaling</h3>
         <p>
             <label>Pengene er udbetalt kontant</label>
@@ -69,13 +78,14 @@
             </InputRadioGroup>
         </p>
         <h3>Konto</h3>
-
-        <input list="accountList" id="accountListInput" size="30" @bind-value="formInfo.Account">
-        <datalist id="accountList">
-            <option value="Skolemand: 47382"></option>
-            <option value="Stoerre heste inc.: 696911"></option>
-            <option value="18 store svedige maend: 1899902"></option>
-        </datalist>
+        <p>
+            <label>Reg. Nr.</label>
+            <InputText @bind-Value="formInfo.RegNr" /><br />
+        </p>
+        <p>
+            <label>Kontonummer:</label>
+            <InputText @bind-Value="formInfo.AccountNumber"/><br />
+        </p>
         <br />
         <div class="spacer"></div>
         <p>
@@ -92,7 +102,6 @@
 
 @code{
     private void HandleValidSubmit() {
-        Console.WriteLine(formInfo.Cash);
         Pdf.GenPdf(formInfo);
     }
 }

@@ -33,5 +33,13 @@ namespace Reimbursement.Data {
 
         [Required (ErrorMessage = "Konto skal udfyldes")]
         public string? Account { get; set; }
+
+        [Required (ErrorMessage = "Registreringsnummer skal udfyldes")]
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Registreringsnummer må kun indeholde tal")]
+        public string? RegNr { get; set; }
+
+        [Required (ErrorMessage = "Kontonummer skal udfyldes")]
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Kontonummer må kun indeholde tal")]
+        public string? AccountNumber { get; set; }
     }
 }

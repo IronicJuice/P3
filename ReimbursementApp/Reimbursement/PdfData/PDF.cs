@@ -18,106 +18,60 @@ namespace Reimbursement.PdfData
             string path = Directory.GetCurrentDirectory();
             doc.LoadFromFile(@path + "/PdfData/PdfForm.pdf");
 
-
             PdfFormWidget form = (PdfFormWidget)doc.Form;
 
             PdfFormFieldWidgetCollection FormWidgetCollection = form.FieldsWidget;
 
-            for (int i = 0; i < FormWidgetCollection.Count; i++)
-            {
+            string[] splitAccount = userInput.Account.Split(": ");
+
+            bool? invertedCash = !userInput.Cash;
+
+            string date = DateTime.Now.ToString("dd-MM-yyyy");
+            string[] splitDate = date.Split("-");
+
+            IDictionary<int, string?> userInputDictionary = new Dictionary<int, string>();
+            userInputDictionary.Add(0, userInput.Name);
+            userInputDictionary.Add(1, userInput.Phone);
+            userInputDictionary.Add(2, userInput.Email);
+            userInputDictionary.Add(3, userInput.Group);
+            userInputDictionary.Add(4, userInput.Purpose);
+            userInputDictionary.Add(5, userInput.ConsumptionParty);
+            userInputDictionary.Add(6, userInput.Amount);
+            userInputDictionary.Add(7, splitAccount[0]);
+            userInputDictionary.Add(8, splitAccount[1]);
+            userInputDictionary.Add(9, userInput.RegNr);
+            userInputDictionary.Add(10, userInput.AccountNumber);
+            userInputDictionary.Add(11, userInput.Cash.ToString());
+            userInputDictionary.Add(12, invertedCash.ToString());
+            userInputDictionary.Add(13, splitDate[0]);
+            userInputDictionary.Add(14, splitDate[1]);
+            userInputDictionary.Add(15, splitDate[2]);
+
+            for (int i = 0; i < FormWidgetCollection.Count; i++) {
                 PdfField field = FormWidgetCollection[i];
-
-                if (field is PdfTextBoxFieldWidget)
-                {
-                    if (field.Name == "Name")
-                    {
-                        PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = userInput.Name;
-                    }
-                    if (field.Name == "TelefonNumber")
-                    {
-                        PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = userInput.Phone;
-                    }
-                    if (field.Name == "Email")
-                    {
-                        PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = userInput.Email;
-                    }
-                    if (field.Name == "Group")
-                    {
-                        PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = userInput.Group;
-                    }
-                    if (field.Name == "MoneyUsagePurpose")
-                    {
-                        PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = userInput.Purpose;
-                    }
-                    if (field.Name == "ConsumptionParticipats")
-                    {
-                        PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = userInput.ConsumptionParty;
-                    }
-                    if (field.Name == "ExpenseAmount")
-                    {
-                        PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = userInput.Amount;
-                    }
-                    if (field.Name == "PostingAccuntName")
-                    {
-                        PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = "PlaceHolder";
-                    }
-                    if (field.Name == "PostingAccuntNumber")
-                    {
-                        PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = "PlaceHolder";
-                    }
-                    if (field.Name == "TransferRegNumber")
-                    {
-                        PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = "PlaceHolder";
-                    }
-                    if (field.Name == "AccountNumber")
-                    {
-                        PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = "PlaceHolder";
-                    }
-                    if (field.Name == "Day")
-                    {
-                        PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = "PH";
-                    }
-                    if (field.Name == "Month")
-                    {
-                        PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = "PH";
-                    }
-                    if (field.Name == "Year")
-                    {
-                        PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field;
-                        textBoxField.Text = "PH";
-                    }
-
+                if (field is PdfCheckBoxWidgetFieldWidget) {
+                    PdfCheckBoxWidgetFieldWidget checkBox = (PdfCheckBoxWidgetFieldWidget)FormWidgetCollection[i];
+                    bool boolValue = bool.Parse(userInputDictionary[i]);
+                    checkBox.Checked = boolValue;
                 }
-                if (field is PdfCheckBoxWidgetFieldWidget)
-                {
-                    PdfCheckBoxWidgetFieldWidget checkBoxField = (PdfCheckBoxWidgetFieldWidget)field;
-                    switch (checkBoxField.Name)
-                    {
-                        case "PayoutCash":
-                            checkBoxField.Checked = true;
-                            break;
-                        case "PayoutTransfer":
-                            checkBoxField.Checked = false;
-                            break;
+                else {
+                    PdfTextBoxFieldWidget textBox = (PdfTextBoxFieldWidget)FormWidgetCollection[i];
+                    if (userInputDictionary[i] == null) {
+                        textBox.Text = "";
+                    }
+                    else {
+                        textBox.Text = userInputDictionary[i];
                     }
                 }
-
             }
+
             string PersonsName = userInput.Name;
             doc.SaveToFile($"PdfData/{PersonsName}.pdf", FileFormat.PDF);
+
+            Task.Factory.StartNew(() => {
+            Thread.Sleep(60000);
+            File.Delete($"PdfData/{PersonsName}.pdf");
+            });
         }
     }
 }
