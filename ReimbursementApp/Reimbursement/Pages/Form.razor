@@ -40,8 +40,10 @@
         <p>
             <label>Gruppe:</label>
             <InputSelect @bind-Value="formInfo.Group" style="width: 200px;">
-            <option>EDB</option>
-            <option>Silly</option>
+                <option>Vælg en gruppe</option>
+                @for (int i = 0; i < formInfo.testList.Count; i++) {
+                    <option>@formInfo.testList[i]</option>
+                }
             </InputSelect><br>
         </p>
         <p>
@@ -59,9 +61,9 @@
             <label>Konto:</label>
             <input list="accountList" id="accountListInput" size="30" @bind-value="formInfo.Account" align="right">
             <datalist id="accountList">
-                <option value="Skolemand: 47382"></option>
-                <option value="Stoerre heste inc.: 696911"></option>
-                <option value="18 store svedige maend: 1899902"></option>
+                @for (int i = 0; i < formInfo.accountList.Count; i++) {
+                    <option>@formInfo.accountList[i]</option>
+                }
             </datalist>
         </p>
         <h3>Udbetaling</h3>
@@ -96,6 +98,8 @@
         <div align="center"></div>
     </EditForm>
 
+    <button @onclick="testFunc">Test Butan</button>
+
 </div>
 <div class="eop"></div>
 </body>
@@ -103,5 +107,11 @@
 @code{
     private void HandleValidSubmit() {
         Pdf.GenPdf(formInfo);
+    }
+
+    private void testFunc() {
+        formInfo.PopulateTextFields(formInfo);
+        formInfo.PopulateGroups();
+        formInfo.PopulateACcounts();
     }
 }

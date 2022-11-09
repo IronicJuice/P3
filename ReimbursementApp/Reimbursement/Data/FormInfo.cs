@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Reimbursement.Data {
     public class FormInfo {
+
         [Required (ErrorMessage = "Navn skal udfyldes")]
         [RegularExpression(@"^[{\p{L}} ]+$", ErrorMessage = "Navn er ugyldigt.")]
         public string? Name { get; set; }
@@ -21,7 +22,7 @@ namespace Reimbursement.Data {
         [RegularExpression(@"^[{\p{L}}0-9 ]+$", ErrorMessage = "Hvad pengene er brugt på er ugyldig.")] //Maybe more characters?
         public string? Purpose { get; set; }
 
-        [RegularExpression(@"^[{\p{L}} ]+$", ErrorMessage = "Deltagere ved fortæring må ikke indeholde specielle tegn.")]
+        [RegularExpression(@"^[{\p{L}}0-9 ]+$", ErrorMessage = "Deltagere ved fortæring må ikke indeholde specielle tegn.")]
         public string? ConsumptionParty { get; set; }
 
         [Required (ErrorMessage = "Udgiftens størrelse skal udfyldes")]
@@ -32,6 +33,7 @@ namespace Reimbursement.Data {
         public bool? Cash { get; set; }
 
         [Required (ErrorMessage = "Konto skal udfyldes")]
+        [RegularExpression(@"^[\p{L}0-9 ]+: ([0-9]+)$", ErrorMessage = "Den indtastede konto er ugyldig")]
         public string? Account { get; set; }
 
         [Required (ErrorMessage = "Registreringsnummer skal udfyldes")]
@@ -41,5 +43,25 @@ namespace Reimbursement.Data {
         [Required (ErrorMessage = "Kontonummer skal udfyldes")]
         [RegularExpression(@"^[0-9]+$", ErrorMessage = "Kontonummer må kun indeholde tal")]
         public string? AccountNumber { get; set; }
+
+        public void PopulateTextFields(FormInfo formInfo) {
+            formInfo.Name = "John Doe";
+            formInfo.Phone = "112";
+            formInfo.Email = "JohnDoe@gmail.com";
+        }
+        
+        public List<string> accountList = new List<string>();
+        public void PopulateACcounts() {
+            accountList.Add("Et navn: 1255033");
+            accountList.Add("To navn: 4520513");
+            accountList.Add("Tre navn: 6412233");
+        }
+
+        public List<string> testList = new List<string>();
+        public void PopulateGroups() {
+            testList.Add("Test");
+            testList.Add("Test2");
+            testList.Add("Test3");
+        }
     }
 }
