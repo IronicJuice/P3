@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "AuFpWoDMYUB+ubJnBGICrsHFro2TQFcBOKLKa0beJeDkDCTAVzpNglTaQhCGDabt8IEZGBYUhtb8XhOAz73z5A==",
+  "dgSpecHash": "N0gnVQS0VvYwkX+va101TGg/08yBIJ6XcvvQ2fi6ZFyqgvFTQhCLGRw+Oq1iaSFP1PhMzT4xZ6Fdq5VsaC1LKA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Pætur Magnussen\\OneDrive - Aalborg Universitet\\AAU\\3_semester\\procjekt\\P3\\ReimbursementApp\\Reimbursement\\Reimbursement.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Pætur Magnussen\\.nuget\\packages\\freespire.pdf\\8.6.0\\freespire.pdf.8.6.0.nupkg.sha512",
     "C:\\Users\\Pætur Magnussen\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\Pætur Magnussen\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\6.0.11\\microsoft.aspnetcore.authentication.google.6.0.11.nupkg.sha512",
     "C:\\Users\\Pætur Magnussen\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.10\\microsoft.aspnetcore.cryptography.internal.6.0.10.nupkg.sha512",
     "C:\\Users\\Pætur Magnussen\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.10\\microsoft.aspnetcore.cryptography.keyderivation.6.0.10.nupkg.sha512",
     "C:\\Users\\Pætur Magnussen\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\6.0.10\\microsoft.aspnetcore.diagnostics.entityframeworkcore.6.0.10.nupkg.sha512",

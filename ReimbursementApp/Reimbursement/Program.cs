@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
@@ -29,6 +30,15 @@ namespace Reimbursement
             builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddSingleton<FormInfo>();
             builder.Services.AddSingleton<PDF>();
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie().AddGoogle(googleoptions =>
+            {
+                googleoptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+                googleoptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+            });
 
             var app = builder.Build();
 

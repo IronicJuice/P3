@@ -71,3 +71,4 @@ C:\Users\Pætur Magnussen\OneDrive - Aalborg Universitet\AAU\3_semester\procjekt
 C:\Users\Pætur Magnussen\OneDrive - Aalborg Universitet\AAU\3_semester\procjekt\P3\ReimbursementApp\Reimbursement\bin\Debug\net6.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\Pætur Magnussen\OneDrive - Aalborg Universitet\AAU\3_semester\procjekt\P3\ReimbursementApp\Reimbursement\bin\Debug\net6.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
 C:\Users\Pætur Magnussen\OneDrive - Aalborg Universitet\AAU\3_semester\procjekt\P3\ReimbursementApp\Reimbursement\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\Users\Pætur Magnussen\OneDrive - Aalborg Universitet\AAU\3_semester\procjekt\P3\ReimbursementApp\Reimbursement\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Google.dll
