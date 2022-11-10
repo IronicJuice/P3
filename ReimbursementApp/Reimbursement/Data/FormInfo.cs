@@ -5,24 +5,24 @@ namespace Reimbursement.Data {
     public class FormInfo {
 
         [Required (ErrorMessage = "Navn skal udfyldes")]
-        [RegularExpression(@"^[{\p{L}} ]+$", ErrorMessage = "Navn er ugyldigt.")]
+        [RegularExpression(@"^[\p{L} ]+$", ErrorMessage = "Navn er ugyldigt.")]
         public string? Name { get; set; }
 
         [RegularExpression(@"^[0-9+-.() ]+$", ErrorMessage = "Telefonnummeret er ugyldigt.")]
         public string? Phone { get; set; }
 
         [Required (ErrorMessage = "Email skal udfyldes")]
-        //Regex for emails is awful, perhaps consider alternatives? For reference: http://emailregex.com/
+        [RegularExpression(@"^.+@.+\.+.+$", ErrorMessage = "Den indtastede email er ugyldig")]
         public string? Email { get; set; }
 
         [Required (ErrorMessage = "Gruppe skal vælges")]
         public string? Group { get; set; }
 
         [Required (ErrorMessage = "Hvad pengene er brugt på skal udfyldes")]
-        [RegularExpression(@"^[{\p{L}}0-9 ]+$", ErrorMessage = "Hvad pengene er brugt på er ugyldig.")] //Maybe more characters?
+        [RegularExpression(@"^[\p{L}0-9 ]+$", ErrorMessage = "Hvad pengene er brugt på er ugyldig.")] //Maybe more characters?
         public string? Purpose { get; set; }
 
-        [RegularExpression(@"^[{\p{L}}0-9 ]+$", ErrorMessage = "Deltagere ved fortæring må ikke indeholde specielle tegn.")]
+        [RegularExpression(@"^[\p{L}0-9,.\n() ]+$", ErrorMessage = "Deltagere ved fortæring må ikke indeholde specielle tegn.")]
         public string? ConsumptionParty { get; set; }
 
         [Required (ErrorMessage = "Udgiftens størrelse skal udfyldes")]
