@@ -1,9 +1,21 @@
-﻿@page "/index"
+﻿@page "/"
+@using Reimbursement.Data;
+@inject UserController controller;
+@inject NavigationManager _navigationmanager;
 
 <PageTitle>Start Screen</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Hello, Summonor!</h1>
 
-Welcome to your new app.
+<button type="button" class="google-login-button" @onclick="GoogleSignIn">Login</button> 
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+
+<!--<SurveyPrompt Title="How is Blazor working for you?" />-->
+
+
+@code {
+    public void GoogleSignIn()
+    {
+        _navigationmanager.NavigateTo("user/GoogleSignIn", true);
+    }
+}
