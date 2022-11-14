@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace Reimbursement.Data {
     public class FormInfo {
@@ -49,12 +52,31 @@ namespace Reimbursement.Data {
             formInfo.Phone = "112";
             formInfo.Email = "JohnDoe@gmail.com";
         }
+
+        public class AccountClass {
+            public class InternalGroup
+            {
+                public string? Name { get; set; }
+                public string[]? Accounts { get; set; }
+            }
+            public IList<InternalGroup>? Group { get; set; }
+        }
         
         public List<string> accountList = new List<string>();
-        public void PopulateACcounts() {
-            accountList.Add("Et navn: 1255033");
-            accountList.Add("To navn: 4520513");
-            accountList.Add("Tre navn: 6412233");
+        public void PopulateAccounts() {
+            string path = Directory.GetCurrentDirectory();
+            string jsonString = File.ReadAllText(path + "/Data/accounts.json");
+            Console.WriteLine(jsonString);
+            AccountClass? testClass = JsonSerializer.Deserialize<AccountClass>(jsonString);
+            /*Console.WriteLine($"{testClass?.Group[0].Name}: {testClass?.Group[0].Accounts[0]}");*/
+            for (int i = 0; i < testClass.Group.Count; i++) {
+                for (int j = 0; j < testClass.Group[i].Accounts.Length; j++)
+                {
+                    accountList.Add(testClass.Group[i].Accounts[j]);
+                    Console.WriteLine(testClass.Group[i].Accounts[j]);
+                }
+            }
+            
         }
 
         public List<string> testList = new List<string>();
