@@ -17,27 +17,31 @@ namespace Reimbursement.Data
     public class UserController : ControllerBase
     {
         [HttpGet("getcurrentuser")]
-        //public async Task<ActionResult<User>> GetCurrentUser()
-        //{
-        //    User currentUser = new User();
+        public async Task<ActionResult<User>> GetCurrentUser()
+        {
+            User currentUser = new User();
 
-        //    if (User.Identity.IsAuthenticated)
-        //    {
-        //        currentUser.EmailAddress = User.FindFirstValue(ClaimTypes.Email);
+            if (User.Identity.IsAuthenticated)
+            {
+                return await Task.FromResult(currentUser);
+            }
+            currentUser.EmailAddress = User.FindFirstValue(ClaimTypes.Email);
 
-        //        if (currentUser == null)
-        //        {
-        //            currentUser = new User();
-        //            currentUser.EmailAddress = User.FindFirstValue(ClaimTypes.Email);
-        //            currentUser.Source = "EXTL";
-        //        }
-        //    }
-        //}
+            if (currentUser == null)
+            {
+                currentUser = new User();
+                currentUser.EmailAddress = User.FindFirstValue(ClaimTypes.Email);
+            }
+
+            return await Task.FromResult(currentUser);
+        }
+
 
         // GET api/<ValuesController>/5
         [HttpGet("GoogleSignIn")]
         public async Task GoogleSignin()
         {
+            Console.WriteLine(User);
             await HttpContext.ChallengeAsync(GoogleDefaults.AuthenticationScheme,
                 new AuthenticationProperties { RedirectUri = "/form" });
         }
