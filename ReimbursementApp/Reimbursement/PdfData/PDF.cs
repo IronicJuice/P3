@@ -33,7 +33,7 @@ namespace Reimbursement.PdfData
             userInputDictionary.Add(0, userInput.Name);
             userInputDictionary.Add(1, userInput.Phone);
             userInputDictionary.Add(2, userInput.Email);
-            userInputDictionary.Add(3, userInput.Group);
+            userInputDictionary.Add(3, userInput.GroupStr);
             userInputDictionary.Add(4, userInput.Purpose);
             userInputDictionary.Add(5, userInput.ConsumptionParty);
             userInputDictionary.Add(6, userInput.Amount);

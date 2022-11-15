@@ -34,15 +34,15 @@
         </p>
         <p>
             <label>Email:</label>
-            <InputText @bind-Value="formInfo.Email" /><br />
+                <InputText @bind-Value="formInfo.Email"/><br />
         </p>
         <h3>Udgiftens formål</h3>
         <p>
             <label>Gruppe:</label>
-            <InputSelect @bind-Value="formInfo.Group" style="width: 200px;">
+                <InputSelect @bind-Value="formInfo.GroupStr" @oninput="formInfo.PopulateAccounts" style="width: 200px;">
                 <option>Vælg en gruppe</option>
-                @for (int i = 0; i < formInfo.testList.Count; i++) {
-                    <option>@formInfo.testList[i]</option>
+                @for (int i = 0; i < formInfo.GroupList.Count; i++) {
+                    <option>@formInfo.GroupList[i]</option>
                 }
             </InputSelect><br>
         </p>
@@ -116,8 +116,8 @@
         //formInfo.PopulateAccounts();
     }
 
-    protected override async Task OnInitializedAsync()
-    {
-        formInfo.PopulateAccounts();
-    }
+   // protected override async Task OnInitializedAsync()
+   // {
+    //    formInfo.PopulateAccounts();
+   // }
 }

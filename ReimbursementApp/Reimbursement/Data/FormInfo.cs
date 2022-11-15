@@ -19,7 +19,7 @@ namespace Reimbursement.Data {
         public string? Email { get; set; }
 
         [Required (ErrorMessage = "Gruppe skal vælges")]
-        public string? Group { get; set; }
+        public string? GroupStr { get; set; }
 
         [Required (ErrorMessage = "Hvad pengene er brugt på skal udfyldes")]
         [RegularExpression(@"^[\p{L}0-9 ]+$", ErrorMessage = "Hvad pengene er brugt på er ugyldig.")] //Maybe more characters?
@@ -59,31 +59,44 @@ namespace Reimbursement.Data {
                 public string? Name { get; set; }
                 public string[]? Accounts { get; set; }
             }
-            public IList<InternalGroup>? Group { get; set; }
+            public IList<InternalGroup>? GroupList { get; set; }
         }
         
         public List<string> accountList = new List<string>();
         public void PopulateAccounts() {
+            accountList.Clear();
             string path = Directory.GetCurrentDirectory();
             string jsonString = File.ReadAllText(path + "/Data/accounts.json");
             Console.WriteLine(jsonString);
-            AccountClass? testClass = JsonSerializer.Deserialize<AccountClass>(jsonString);
-            /*Console.WriteLine($"{testClass?.Group[0].Name}: {testClass?.Group[0].Accounts[0]}");*/
-            for (int i = 0; i < testClass.Group.Count; i++) {
-                for (int j = 0; j < testClass.Group[i].Accounts.Length; j++)
+            AccountClass? Account = JsonSerializer.Deserialize<AccountClass>(jsonString);
+            Console.WriteLine(Account.GroupList[0].Name); //The groups seem to have false values
+            Console.WriteLine(GroupStr);
+            if (Account is not null)
+            {
+                for (int i = 0; i < Account.GroupList.Count; i++)
                 {
-                    accountList.Add(testClass.Group[i].Accounts[j]);
-                    Console.WriteLine(testClass.Group[i].Accounts[j]);
+                    if (Account.GroupList[i].Name == GroupStr)
+                    {
+                        for (int j = 0; j < Account.GroupList[i].Accounts.Length; j++)
+                        {
+                            accountList.Add(Account.GroupList[i].Accounts[j]);
+                            Console.WriteLine(Account.GroupList[i].Accounts[j]);
+                        }
+                    }
                 }
+            }
+            else
+            {
+                throw new Exception("Account is null");
             }
             
         }
 
-        public List<string> testList = new List<string>();
+        public List<string> GroupList = new List<string>();
         public void PopulateGroups() {
-            testList.Add("Test");
-            testList.Add("Test2");
-            testList.Add("Test3");
+            GroupList.Add("EDB");
+            GroupList.Add("Silly");
+            GroupList.Add("Test3");
         }
     }
 }
