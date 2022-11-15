@@ -45,7 +45,7 @@ namespace Reimbursement
                 IConfiguration googleAuthSection = builder.Configuration.GetSection("Authentication:Google");
                 googleoptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];
                 googleoptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
-                googleoptions.Scope.Add("Profile");
+                googleoptions.SaveTokens = true;
             });
 
             var app = builder.Build();

@@ -41,7 +41,8 @@ namespace Reimbursement.Data
         [HttpGet("GoogleSignIn")]
         public async Task GoogleSignin()
         {
-            Console.WriteLine(User);
+            var token = await HttpContext.GetTokenAsync(GoogleDefaults.AuthenticationScheme, "access_token");
+            Console.WriteLine(token);
             await HttpContext.ChallengeAsync(GoogleDefaults.AuthenticationScheme,
                 new AuthenticationProperties { RedirectUri = "/form" });
         }
