@@ -1,6 +1,7 @@
 ﻿@page "/form"
 @using Reimbursement.Data;
 @inject FormInfo formInfo
+@inject Mailservice Mail
 <PageTitle>Form</PageTitle>
 
 <style>
@@ -83,14 +84,19 @@
         </p>
         <div class="spacer"></div>
         <div align="center"></div>
-    </EditForm>
-
-</div>
+            <button type="button" class="google-login-button" onclick=@(() => SendMail("userEmail", "token"))>Submit</button>
+        </EditForm>
+      
+    </div>
 <div class="eop"></div>
 </body>
 
 @code{
     private void HandleValidSubmit() {
         Console.WriteLine(formInfo.Cash);
+    }
+
+    public void SendMail(string userEmail, string token){
+        Mail.SendMail(userEmail,token);
     }
 }
