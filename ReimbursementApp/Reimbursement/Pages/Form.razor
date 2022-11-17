@@ -39,7 +39,7 @@
         <h3>Udgiftens formål</h3>
         <p>
             <label>Gruppe:</label>
-                <InputSelect @bind-Value="formInfo.GroupStr" @oninput="formInfo.PopulateAccounts" style="width: 200px;">
+                <InputSelect @bind-Value="formInfo.GroupStr" @onclick="formInfo.PopulateAccounts" style="width: 200px;">
                 <option>Vælg en gruppe</option>
                 @for (int i = 0; i < formInfo.GroupList.Count; i++) {
                     <option>@formInfo.GroupList[i]</option>
@@ -106,18 +106,14 @@
 
 @code{
 
-    private void HandleValidSubmit() {
+    private void HandleValidSubmit() 
+    {
         Pdf.GenPdf(formInfo);
     }
 
-    private void testFunc() {
+    private void testFunc() 
+    {
         formInfo.PopulateTextFields(formInfo);
         formInfo.PopulateGroups();
-        //formInfo.PopulateAccounts();
     }
-
-   // protected override async Task OnInitializedAsync()
-   // {
-    //    formInfo.PopulateAccounts();
-   // }
 }
