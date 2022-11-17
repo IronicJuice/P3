@@ -21,7 +21,7 @@ namespace Reimbursement.Data
         public string? GroupStr { get; set; }
 
         [Required(ErrorMessage = "Hvad pengene er brugt på skal udfyldes")]
-        [RegularExpression(@"^[\p{L}0-9 ,.!@;:()[]]+$", ErrorMessage = "Hvad pengene er brugt på er ugyldig.")] //Maybe more characters?
+        [RegularExpression(@"^[\p{L}0-9 ,.!@;:()]+$", ErrorMessage = "Hvad pengene er brugt på er ugyldig.")] //Maybe more characters?
         public string? Purpose { get; set; }
 
         [RegularExpression(@"^[\p{L}0-9,.\n() ]+$", ErrorMessage = "Deltagere ved fortæring må ikke indeholde specielle tegn.")]
