@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Primitives;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 
@@ -10,12 +11,12 @@ using System.Security.Claims;
 namespace Reimbursement.Data
 {
 
-
-
     [Route("[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
+
+        
         [HttpGet("getcurrentuser")]
         public async Task<ActionResult<User>> GetCurrentUser()
         {
@@ -36,15 +37,24 @@ namespace Reimbursement.Data
             return await Task.FromResult(currentUser);
         }
 
+    
 
         // GET api/<ValuesController>/5
         [HttpGet("GoogleSignIn")]
         public async Task GoogleSignin()
         {
-            var token = await HttpContext.GetTokenAsync(GoogleDefaults.AuthenticationScheme, "access_token");
-            Console.WriteLine(token);
+            //var token = await HttpContext.GetTokenAsync(GoogleDefaults.AuthenticationScheme, "access_token");
+            //Console.WriteLine(token)
+            GetToken();
             await HttpContext.ChallengeAsync(GoogleDefaults.AuthenticationScheme,
                 new AuthenticationProperties { RedirectUri = "/form" });
+        }
+        public static string token { get; set; }
+
+        public async void GetToken()
+        {
+            token = await HttpContext.GetTokenAsync(GoogleDefaults.AuthenticationScheme, "access_token");
+            Console.WriteLine(token);
         }
     }
 }

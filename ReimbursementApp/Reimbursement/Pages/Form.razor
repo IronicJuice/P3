@@ -84,7 +84,7 @@
         </p>
         <div class="spacer"></div>
         <div align="center"></div>
-            <button type="button" class="google-login-button" onclick=@(() => SendMail("userEmail", "token"))>Submit</button>
+            <button type="button" class="google-login-button" onclick=@(() => SendMail())>Submit</button>
         </EditForm>
       
     </div>
@@ -96,7 +96,7 @@
         Console.WriteLine(formInfo.Cash);
     }
 
-    public void SendMail(string userEmail, string token){
-        Mail.SendMail(userEmail,token);
+    public void SendMail(){
+        Mail.SendMail();
     }
 }
