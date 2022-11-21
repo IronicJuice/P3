@@ -33,6 +33,7 @@ namespace Reimbursement
             builder.Services.AddSingleton<FormInfo>();
             builder.Services.AddSingleton<PDF>();
             builder.Services.AddSingleton<UserController>();
+            builder.Services.AddSingleton<Mailservice>();
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddAuthentication(options =>
@@ -46,6 +47,11 @@ namespace Reimbursement
                 googleoptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];
                 googleoptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
                 googleoptions.SaveTokens = true;
+                var scope = googleoptions.Scope;
+                scope.Add("https://mail.google.com/");
+                //scope.Add("https://www.googleapis.com/auth/userinfo.profile");
+                //scope.Add("https://www.googleapis.com/auth/userinfo.email");
+                scope.Add("https://www.googleapis.com/auth/gmail.send");
             });
 
             var app = builder.Build();

@@ -1,6 +1,9 @@
 ﻿@page "/form"
 @using Reimbursement.Data;
+@using Reimbursement.PdfData;
 @inject FormInfo formInfo
+@inject Mailservice Mail
+@inject PDF pdf
 <PageTitle>Form</PageTitle>
 
 <style>
@@ -83,14 +86,20 @@
         </p>
         <div class="spacer"></div>
         <div align="center"></div>
-    </EditForm>
-
-</div>
+            <button type="button" class="google-login-button" onclick=@(() => SendMail())>Submit</button>
+        </EditForm>
+      
+    </div>
 <div class="eop"></div>
 </body>
 
 @code{
     private void HandleValidSubmit() {
         Console.WriteLine(formInfo.Cash);
+    }
+
+    public void SendMail(){
+        pdf.GenPdf();
+        Mail.SendMail();
     }
 }
