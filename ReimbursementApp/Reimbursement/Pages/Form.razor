@@ -1,7 +1,9 @@
 ﻿@page "/form"
 @using Reimbursement.Data;
+@using Reimbursement.PdfData;
 @inject FormInfo formInfo
 @inject Mailservice Mail
+@inject PDF pdf
 <PageTitle>Form</PageTitle>
 
 <style>
@@ -97,6 +99,7 @@
     }
 
     public void SendMail(){
+        pdf.GenPdf();
         Mail.SendMail();
     }
 }

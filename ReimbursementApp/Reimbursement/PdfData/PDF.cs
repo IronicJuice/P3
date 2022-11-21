@@ -1,4 +1,5 @@
 ﻿//https://www.e-iceblue.com/Tutorials/Spire.PDF/Spire.PDF-Program-Guide/C-/VB.NET-Create-FormField-in-PDF.html
+using Microsoft.EntityFrameworkCore.Metadata;
 using Spire;
 using Spire.Pdf;
 using Spire.Pdf.Fields;

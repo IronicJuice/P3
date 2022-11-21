@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Authentication;
 using Reimbursement.Data;
+using Reimbursement.PdfData;
 using System.Drawing.Text;
 using Microsoft.Win32.SafeHandles;
+using Spire.Pdf;
 
 namespace Reimbursement.Data
 {
@@ -30,17 +32,27 @@ namespace Reimbursement.Data
                 // use Gmail SMTP OAUTH 2.0 authentication
                 oServer.AuthType = SmtpAuthType.XOAUTH2;
                 // set user authentication
-                oServer.User = "bredfort1234@gmail.com";
+                oServer.User = "pmtv96@gmail.com";
                 // use access token as password
                 oServer.Password = UserController.token;
 
                 SmtpMail oMail = new SmtpMail("TryIt");
                 // Your gmail email address
-                oMail.From = "bredfort1234@gmail.com";
+                oMail.From = "pmtv96@gmail.com";
                 oMail.To = "bredfort1234@gmail.com";
 
                 oMail.Subject = "Test email sent from with microsoft asp";
                 oMail.TextBody = "this is a test email sent from c# project with gmail.";
+                
+                //Sender bare en testpdf lige nu
+                oMail.AddAttachment(@"C:\Users\Rasmu\AAU\3. semester\TestPdf.pdf");
+                //PDF pdfdocument = new PDF();
+                //pdfdocument.GenPdf();
+
+                string path = Directory.GetCurrentDirectory();
+                oMail.AddAttachment(@path + "/PdfData/PeterWeihe.pdf");
+                
+                
 
                 Console.WriteLine("start to send email using OAUTH 2.0 ...");
                 Console.WriteLine(UserController.token);
