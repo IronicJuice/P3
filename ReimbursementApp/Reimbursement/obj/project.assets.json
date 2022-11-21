@@ -3555,23 +3555,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\m\\.nuget\\packages\\": {},
+    "C:\\Users\\xgree\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\m\\Source\\Repos\\IronicJuice\\P3\\ReimbursementApp\\Reimbursement\\Reimbursement.csproj",
+      "projectUniqueName": "C:\\Users\\xgree\\Source\\Repos\\IronicJuice\\P3\\ReimbursementApp\\Reimbursement\\Reimbursement.csproj",
       "projectName": "Reimbursement",
-      "projectPath": "C:\\Users\\m\\Source\\Repos\\IronicJuice\\P3\\ReimbursementApp\\Reimbursement\\Reimbursement.csproj",
-      "packagesPath": "C:\\Users\\m\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\m\\Source\\Repos\\IronicJuice\\P3\\ReimbursementApp\\Reimbursement\\obj\\",
+      "projectPath": "C:\\Users\\xgree\\Source\\Repos\\IronicJuice\\P3\\ReimbursementApp\\Reimbursement\\Reimbursement.csproj",
+      "packagesPath": "C:\\Users\\xgree\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\xgree\\Source\\Repos\\IronicJuice\\P3\\ReimbursementApp\\Reimbursement\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\m\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\xgree\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3580,7 +3580,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
