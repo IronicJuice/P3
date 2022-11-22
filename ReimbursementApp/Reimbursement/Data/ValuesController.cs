@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Primitives;
@@ -10,44 +11,18 @@ using System.Security.Claims;
 
 namespace Reimbursement.Data
 {
-
     [Route("[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UserController : Controller
     {
-
-        
-        [HttpGet("getcurrentuser")]
-        public async Task<ActionResult<User>> GetCurrentUser()
-        {
-            User currentUser = new User();
-
-            if (User.Identity.IsAuthenticated)
-            {
-                return await Task.FromResult(currentUser);
-            }
-            currentUser.EmailAddress = User.FindFirstValue(ClaimTypes.Email);
-
-            if (currentUser == null)
-            {
-                currentUser = new User();
-                currentUser.EmailAddress = User.FindFirstValue(ClaimTypes.Email);
-            }
-
-            return await Task.FromResult(currentUser);
-        }
-
-    
 
         // GET api/<ValuesController>/5
         [HttpGet("GoogleSignIn")]
         public async Task GoogleSignin()
         {
-            //var token = await HttpContext.GetTokenAsync(GoogleDefaults.AuthenticationScheme, "access_token");
-            //Console.WriteLine(token)
-            GetToken();
             await HttpContext.ChallengeAsync(GoogleDefaults.AuthenticationScheme,
                 new AuthenticationProperties { RedirectUri = "/form" });
+            GetToken();
         }
         public static string token { get; set; }
 
@@ -56,6 +31,7 @@ namespace Reimbursement.Data
             token = await HttpContext.GetTokenAsync(GoogleDefaults.AuthenticationScheme, "access_token");
             Console.WriteLine(token);
         }
+        
     }
 }
 

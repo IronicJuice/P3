@@ -7,17 +7,15 @@ using Reimbursement.PdfData;
 using System.Drawing.Text;
 using Microsoft.Win32.SafeHandles;
 using Spire.Pdf;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Reimbursement.Data
 {
     public class Mailservice : UserController
     {
-        //public async void GetToken()
-        //{
-        //    var token = await HttpContext.GetTokenAsync(GoogleDefaults.AuthenticationScheme, "access_token");
-        //    Console.WriteLine(token);
-        //}
-        public void SendMail()
+        //private string Name { get; set; }
+        //private string Email { get; set; }
+        public void SendMail(string Name, string Email)
         {
             try
             {
@@ -32,20 +30,20 @@ namespace Reimbursement.Data
                 // use Gmail SMTP OAUTH 2.0 authentication
                 oServer.AuthType = SmtpAuthType.XOAUTH2;
                 // set user authentication
-                oServer.User = "pmtv96@gmail.com";
+                oServer.User = Email;
                 // use access token as password
                 oServer.Password = UserController.token;
 
                 SmtpMail oMail = new SmtpMail("TryIt");
                 // Your gmail email address
-                oMail.From = "pmtv96@gmail.com";
+                oMail.From = Email;
                 oMail.To = "bredfort1234@gmail.com";
 
                 oMail.Subject = "Test email sent from with microsoft asp";
                 oMail.TextBody = "this is a test email sent from c# project with gmail.";
                 
                 //Sender bare en testpdf lige nu
-                oMail.AddAttachment(@"C:\Users\Rasmu\AAU\3. semester\TestPdf.pdf");
+                //oMail.AddAttachment(@"C:\Users\Rasmu\AAU\3. semester\TestPdf.pdf");
                 //PDF pdfdocument = new PDF();
                 //pdfdocument.GenPdf();
 
