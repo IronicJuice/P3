@@ -104,7 +104,7 @@
         <div class="spacer"></div>
         <div align="center"></div>
             <button type="button" class="google-login-button" onclick=@(() => SendMail())>Submit</button>
-    </div>
+    
     </EditForm>
 
     <button @onclick="testFunc">Test Butan</button>
@@ -147,7 +147,7 @@
     private void HandleValidSubmit() 
     {
         Pdf.GenPdf(formInfo);
-        Console.WriteLine(formInfo.Cash)
+        Console.WriteLine(formInfo.Cash);
     }
 
     private void testFunc() 
@@ -157,7 +157,7 @@
     }
 
     public void SendMail(){
-        pdf.GenPdf();
+        //pdf.GenPdf();
         Mail.SendMail(currentuserName, currentuserEmail);
     }
 }

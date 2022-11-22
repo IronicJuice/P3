@@ -2,19 +2,6 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "EASendMail/7.9.0.9": {
-        "type": "package",
-        "dependencies": {
-          "System.Security.Cryptography.Pkcs": "6.0.1"
-        },
-        "compile": {
-          "lib/net6.0/EASendMail.dll": {
-            "related": ".deps.json"
-          }
-        },
-        "runtime": {
-          "lib/net6.0/EASendMail.dll": {
-            "related": ".deps.json",
       "AngleSharp/0.17.1": {
         "type": "package",
         "dependencies": {
@@ -120,6 +107,22 @@
           }
         }
       },
+      "EASendMail/7.9.0.9": {
+        "type": "package",
+        "dependencies": {
+          "System.Security.Cryptography.Pkcs": "6.0.1"
+        },
+        "compile": {
+          "lib/net6.0/EASendMail.dll": {
+            "related": ".deps.json"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/EASendMail.dll": {
+            "related": ".deps.json"
+          }
+        }
+      },
       "FreeSpire.PDF/8.6.0": {
         "type": "package",
         "dependencies": {
@@ -154,6 +157,18 @@
         "type": "package",
         "compile": {
           "lib/net6.0/Microsoft.AspNetCore.Authentication.Google.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.Authentication.Google.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Microsoft.AspNetCore.Authorization/6.0.0": {
         "type": "package",
         "dependencies": {
@@ -167,13 +182,6 @@
           }
         },
         "runtime": {
-          "lib/net6.0/Microsoft.AspNetCore.Authentication.Google.dll": {
-            "related": ".xml"
-          }
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ],
           "lib/net6.0/Microsoft.AspNetCore.Authorization.dll": {
             "related": ".xml"
           }
@@ -1524,35 +1532,6 @@
     }
   },
   "libraries": {
-    "EASendMail/7.9.0.9": {
-      "sha512": "ItVsgmoyWftmk6wqRlo2FA6iEbLfOF+8a9/MuUoahRbzOy9s+8XnheWP5XOoBS9yR0pEbN6kOCUfpOBVp3FWBQ==",
-      "type": "package",
-      "path": "easendmail/7.9.0.9",
-      "hasTools": true,
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "easendmail.7.9.0.9.nupkg.sha512",
-        "easendmail.nuspec",
-        "lib/net20-cf/EASendMail.dll",
-        "lib/net20/EASendMail.dll",
-        "lib/net35-cf/EASendMail.dll",
-        "lib/net40/EASendMail.dll",
-        "lib/net45/EASendMail.dll",
-        "lib/net461/EASendMail.dll",
-        "lib/net472/EASendMail.dll",
-        "lib/net5.0/EASendMail.deps.json",
-        "lib/net5.0/EASendMail.dll",
-        "lib/net6.0/EASendMail.deps.json",
-        "lib/net6.0/EASendMail.dll",
-        "lib/netcoreapp3.1/EASendMail.deps.json",
-        "lib/netcoreapp3.1/EASendMail.dll",
-        "lib/netstandard2.0/EASendMail.deps.json",
-        "lib/netstandard2.0/EASendMail.dll",
-        "lib/uap10.0/EASendMail.winmd",
-        "tools/init.ps1",
-        "tools/installed.dat"
-      ],
     "AngleSharp/0.17.1": {
       "sha512": "5MPI4bbixlwxb0W/smOMeIR+QlxMy5/5jD+WnIAw4pBC+7AhLPe5bS3cLgQMJyvd6q0A48sG+uYOt/ep406GLA==",
       "type": "package",
@@ -1666,6 +1645,35 @@
         "lib/netstandard2.1/Bunit.Web.xml"
       ]
     },
+    "EASendMail/7.9.0.9": {
+      "sha512": "ItVsgmoyWftmk6wqRlo2FA6iEbLfOF+8a9/MuUoahRbzOy9s+8XnheWP5XOoBS9yR0pEbN6kOCUfpOBVp3FWBQ==",
+      "type": "package",
+      "path": "easendmail/7.9.0.9",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "easendmail.7.9.0.9.nupkg.sha512",
+        "easendmail.nuspec",
+        "lib/net20-cf/EASendMail.dll",
+        "lib/net20/EASendMail.dll",
+        "lib/net35-cf/EASendMail.dll",
+        "lib/net40/EASendMail.dll",
+        "lib/net45/EASendMail.dll",
+        "lib/net461/EASendMail.dll",
+        "lib/net472/EASendMail.dll",
+        "lib/net5.0/EASendMail.deps.json",
+        "lib/net5.0/EASendMail.dll",
+        "lib/net6.0/EASendMail.deps.json",
+        "lib/net6.0/EASendMail.dll",
+        "lib/netcoreapp3.1/EASendMail.deps.json",
+        "lib/netcoreapp3.1/EASendMail.dll",
+        "lib/netstandard2.0/EASendMail.deps.json",
+        "lib/netstandard2.0/EASendMail.dll",
+        "lib/uap10.0/EASendMail.winmd",
+        "tools/init.ps1"
+      ]
+    },
     "FreeSpire.PDF/8.6.0": {
       "sha512": "wXMAuriDaNcQWLZhg6cRGE+qE7rdeEIrSq8bePreuUl2pZDvt+yQ1YeSQEGFndekbLhff6lAd8Zd3uou7TvnEA==",
       "type": "package",
@@ -1708,6 +1716,17 @@
       "sha512": "EjZhKpe5WVy6p23pRYLhO62t4rQW7bZO72J0eU01TmbOYRsJ/ZAUZqYQ4C3Kd3+CH18Ac4KkSl3X8YhuXHAatA==",
       "type": "package",
       "path": "microsoft.aspnetcore.authentication.google/6.0.11",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net6.0/Microsoft.AspNetCore.Authentication.Google.dll",
+        "lib/net6.0/Microsoft.AspNetCore.Authentication.Google.xml",
+        "microsoft.aspnetcore.authentication.google.6.0.11.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.google.nuspec"
+      ]
+    },
     "Microsoft.AspNetCore.Authorization/6.0.0": {
       "sha512": "HPEhmNwINXzGVWirzmvVxx5/GkoaQJC7vKNIbhOUTzgnRHEf2zO6S2s4lMw3TPFWBGcAlfn6Ta0cVB9f15QC8w==",
       "type": "package",
@@ -1717,10 +1736,6 @@
         ".signature.p7s",
         "Icon.png",
         "THIRD-PARTY-NOTICES.TXT",
-        "lib/net6.0/Microsoft.AspNetCore.Authentication.Google.dll",
-        "lib/net6.0/Microsoft.AspNetCore.Authentication.Google.xml",
-        "microsoft.aspnetcore.authentication.google.6.0.11.nupkg.sha512",
-        "microsoft.aspnetcore.authentication.google.nuspec",
         "lib/net461/Microsoft.AspNetCore.Authorization.dll",
         "lib/net461/Microsoft.AspNetCore.Authorization.xml",
         "lib/net6.0/Microsoft.AspNetCore.Authorization.dll",
@@ -3719,23 +3734,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\m\\.nuget\\packages\\": {},
+    "C:\\Users\\cchan\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\m\\Source\\Repos\\IronicJuice\\P3\\ReimbursementApp\\Reimbursement\\Reimbursement.csproj",
+      "projectUniqueName": "C:\\Users\\cchan\\Documents\\Uni stuff\\merge mappe\\P3\\ReimbursementApp\\Reimbursement\\Reimbursement.csproj",
       "projectName": "Reimbursement",
-      "projectPath": "C:\\Users\\m\\Source\\Repos\\IronicJuice\\P3\\ReimbursementApp\\Reimbursement\\Reimbursement.csproj",
-      "packagesPath": "C:\\Users\\m\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\m\\Source\\Repos\\IronicJuice\\P3\\ReimbursementApp\\Reimbursement\\obj\\",
+      "projectPath": "C:\\Users\\cchan\\Documents\\Uni stuff\\merge mappe\\P3\\ReimbursementApp\\Reimbursement\\Reimbursement.csproj",
+      "packagesPath": "C:\\Users\\cchan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\cchan\\Documents\\Uni stuff\\merge mappe\\P3\\ReimbursementApp\\Reimbursement\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\m\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\cchan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3819,14 +3834,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.403\\RuntimeIdentifierGraph.json"
-      }
-    }
-  }
-}
-  }
-}
-        }
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -22,14 +22,6 @@
           "Reimbursement.dll": {}
         }
       },
-      "EASendMail/7.9.0.9": {
-        "dependencies": {
-          "System.Security.Cryptography.Pkcs": "6.0.1"
-        },
-        "runtime": {
-          "lib/net6.0/EASendMail.dll": {
-            "assemblyVersion": "7.9.0.9",
-            "fileVersion": "7.9.0.9",
       "AngleSharp/0.17.1": {
         "dependencies": {
           "System.Buffers": "4.5.1",
@@ -107,6 +99,17 @@
           }
         }
       },
+      "EASendMail/7.9.0.9": {
+        "dependencies": {
+          "System.Security.Cryptography.Pkcs": "6.0.1"
+        },
+        "runtime": {
+          "lib/net6.0/EASendMail.dll": {
+            "assemblyVersion": "7.9.0.9",
+            "fileVersion": "7.9.0.9"
+          }
+        }
+      },
       "FreeSpire.PDF/8.6.0": {
         "dependencies": {
           "System.Drawing.Common": "6.0.0",
@@ -131,7 +134,10 @@
         "runtime": {
           "lib/net6.0/Microsoft.AspNetCore.Authentication.Google.dll": {
             "assemblyVersion": "6.0.11.0",
-            "fileVersion": "6.0.1122.52304",
+            "fileVersion": "6.0.1122.52304"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Authorization/6.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Metadata": "6.0.0",
@@ -792,12 +798,6 @@
       "serviceable": false,
       "sha512": ""
     },
-    "EASendMail/7.9.0.9": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-ItVsgmoyWftmk6wqRlo2FA6iEbLfOF+8a9/MuUoahRbzOy9s+8XnheWP5XOoBS9yR0pEbN6kOCUfpOBVp3FWBQ==",
-      "path": "easendmail/7.9.0.9",
-      "hashPath": "easendmail.7.9.0.9.nupkg.sha512",
     "AngleSharp/0.17.1": {
       "type": "package",
       "serviceable": true,
@@ -840,6 +840,13 @@
       "path": "bunit.web/1.12.6",
       "hashPath": "bunit.web.1.12.6.nupkg.sha512"
     },
+    "EASendMail/7.9.0.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ItVsgmoyWftmk6wqRlo2FA6iEbLfOF+8a9/MuUoahRbzOy9s+8XnheWP5XOoBS9yR0pEbN6kOCUfpOBVp3FWBQ==",
+      "path": "easendmail/7.9.0.9",
+      "hashPath": "easendmail.7.9.0.9.nupkg.sha512"
+    },
     "FreeSpire.PDF/8.6.0": {
       "type": "package",
       "serviceable": true,
@@ -859,7 +866,8 @@
       "serviceable": true,
       "sha512": "sha512-EjZhKpe5WVy6p23pRYLhO62t4rQW7bZO72J0eU01TmbOYRsJ/ZAUZqYQ4C3Kd3+CH18Ac4KkSl3X8YhuXHAatA==",
       "path": "microsoft.aspnetcore.authentication.google/6.0.11",
-      "hashPath": "microsoft.aspnetcore.authentication.google.6.0.11.nupkg.sha512",
+      "hashPath": "microsoft.aspnetcore.authentication.google.6.0.11.nupkg.sha512"
+    },
     "Microsoft.AspNetCore.Authorization/6.0.0": {
       "type": "package",
       "serviceable": true,
@@ -1387,13 +1395,3 @@
     }
   }
 }
-  }
-}
-          }
-        }
-      }
-    }
-  }
-}
-
-  
