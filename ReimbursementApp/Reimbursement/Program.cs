@@ -1,10 +1,14 @@
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
-using Reimbursement.Areas.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+//using Reimbursement.Areas.Identity;
 using Reimbursement.Data;
 using Reimbursement.PdfData;
 
@@ -17,18 +21,40 @@ namespace Reimbursement
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
-            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            //builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseSqlServer(connectionString));
+            //builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+            //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddRazorPages();
+
             builder.Services.AddServerSideBlazor();
-            builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
+            //builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddSingleton<FormInfo>();
             builder.Services.AddSingleton<PDF>();
+            builder.Services.AddSingleton<UserController>();
+            builder.Services.AddSingleton<Mailservice>();
+            builder.Services.AddControllersWithViews();
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }
+            ).AddCookie().
+            AddGoogle(googleoptions =>
+            {
+                IConfiguration googleAuthSection = builder.Configuration.GetSection("Authentication:Google");
+                googleoptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+                googleoptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+                googleoptions.SaveTokens = true;
+                var scope = googleoptions.Scope;
+                scope.Add("https://mail.google.com/");
+                //scope.Add("https://www.googleapis.com/auth/userinfo.profile");
+                //scope.Add("https://www.googleapis.com/auth/userinfo.email");
+                scope.Add("https://www.googleapis.com/auth/gmail.send");
+            });
 
             var app = builder.Build();
 

@@ -1,6 +1,13 @@
 ﻿@page "/form"
 @using Reimbursement.Data;
+@using Reimbursement.PdfData;
+@using Microsoft.AspNetCore.Components.Authorization;
+@using System.Security.Claims;
 @inject FormInfo formInfo
+@inject Mailservice Mail
+@inject PDF pdf
+@inject UserController usercontroller
+
 @inject PdfData.PDF Pdf
 <PageTitle>Form</PageTitle>
 
@@ -96,6 +103,8 @@
         </p>
         <div class="spacer"></div>
         <div align="center"></div>
+            <button type="button" class="google-login-button" onclick=@(() => SendMail())>Submit</button>
+    
     </EditForm>
 
     <button @onclick="testFunc">Test Butan</button>
@@ -105,15 +114,50 @@
 </body>
 
 @code{
+    protected override async void OnInitialized()
+    {
+        Logusername();
+        //base.OnInitialized();
+    }
+
+    public string currentuserName { get; set; }
+    public string currentuserEmail { get; set; }
+
+    [CascadingParameter]
+    public Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    public async void Logusername()
+    {
+        var authstate = await authenticationStateTask;
+        var user = authstate.User;
+        if (user.Identity.IsAuthenticated)
+        {
+            currentuserEmail = user.FindFirstValue(ClaimTypes.Email);
+            currentuserName = user.FindFirstValue(ClaimTypes.Name);
+        }
+        else
+        {
+            Console.WriteLine("there was an error");
+        }
+        User currentUser = new User(currentuserEmail, currentuserName);
+        Console.WriteLine(currentUser.EmailAddress);
+        Console.WriteLine(currentuserName);
+    }
 
     private void HandleValidSubmit() 
     {
         Pdf.GenPdf(formInfo);
+        Console.WriteLine(formInfo.Cash);
     }
 
     private void testFunc() 
     {
         formInfo.PopulateTextFields(formInfo);
         formInfo.PopulateGroups();
+    }
+
+    public void SendMail(){
+        //pdf.GenPdf();
+        Mail.SendMail(currentuserName, currentuserEmail);
     }
 }

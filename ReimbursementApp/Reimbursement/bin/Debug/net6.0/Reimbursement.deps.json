@@ -8,7 +8,9 @@
     ".NETCoreApp,Version=v6.0": {
       "Reimbursement/1.0.0": {
         "dependencies": {
+          "EASendMail": "7.9.0.9",
           "FreeSpire.PDF": "8.6.0",
+          "Microsoft.AspNetCore.Authentication.Google": "6.0.11",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "6.0.10",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.10",
           "Microsoft.AspNetCore.Identity.UI": "6.0.10",
@@ -97,6 +99,17 @@
           }
         }
       },
+      "EASendMail/7.9.0.9": {
+        "dependencies": {
+          "System.Security.Cryptography.Pkcs": "6.0.1"
+        },
+        "runtime": {
+          "lib/net6.0/EASendMail.dll": {
+            "assemblyVersion": "7.9.0.9",
+            "fileVersion": "7.9.0.9"
+          }
+        }
+      },
       "FreeSpire.PDF/8.6.0": {
         "dependencies": {
           "System.Drawing.Common": "6.0.0",
@@ -114,6 +127,14 @@
           "lib/netstandard2.0/Humanizer.dll": {
             "assemblyVersion": "2.8.0.0",
             "fileVersion": "2.8.26.1919"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Authentication.Google/6.0.11": {
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.Authentication.Google.dll": {
+            "assemblyVersion": "6.0.11.0",
+            "fileVersion": "6.0.1122.52304"
           }
         }
       },
@@ -645,6 +666,7 @@
           }
         }
       },
+      "System.Formats.Asn1/6.0.0": {},
       "System.IdentityModel.Tokens.Jwt/6.8.0": {
         "dependencies": {
           "Microsoft.IdentityModel.JsonWebTokens": "6.8.0",
@@ -685,6 +707,25 @@
         }
       },
       "System.Security.Cryptography.Cng/4.5.0": {},
+      "System.Security.Cryptography.Pkcs/6.0.1": {
+        "dependencies": {
+          "System.Formats.Asn1": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/System.Security.Cryptography.Pkcs.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.522.21309"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net6.0/System.Security.Cryptography.Pkcs.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.522.21309"
+          }
+        }
+      },
       "System.Security.Cryptography.ProtectedData/4.7.0": {
         "runtime": {
           "lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll": {
@@ -799,6 +840,13 @@
       "path": "bunit.web/1.12.6",
       "hashPath": "bunit.web.1.12.6.nupkg.sha512"
     },
+    "EASendMail/7.9.0.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ItVsgmoyWftmk6wqRlo2FA6iEbLfOF+8a9/MuUoahRbzOy9s+8XnheWP5XOoBS9yR0pEbN6kOCUfpOBVp3FWBQ==",
+      "path": "easendmail/7.9.0.9",
+      "hashPath": "easendmail.7.9.0.9.nupkg.sha512"
+    },
     "FreeSpire.PDF/8.6.0": {
       "type": "package",
       "serviceable": true,
@@ -812,6 +860,13 @@
       "sha512": "sha512-OiKusGL20vby4uDEswj2IgkdchC1yQ6rwbIkZDVBPIR6al2b7n3pC91elBul9q33KaBgRKhbZH3+2Ur4fnWx2A==",
       "path": "humanizer.core/2.8.26",
       "hashPath": "humanizer.core.2.8.26.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Authentication.Google/6.0.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-EjZhKpe5WVy6p23pRYLhO62t4rQW7bZO72J0eU01TmbOYRsJ/ZAUZqYQ4C3Kd3+CH18Ac4KkSl3X8YhuXHAatA==",
+      "path": "microsoft.aspnetcore.authentication.google/6.0.11",
+      "hashPath": "microsoft.aspnetcore.authentication.google.6.0.11.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authorization/6.0.0": {
       "type": "package",
@@ -1233,6 +1288,13 @@
       "path": "system.drawing.common/6.0.0",
       "hashPath": "system.drawing.common.6.0.0.nupkg.sha512"
     },
+    "System.Formats.Asn1/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-T6fD00dQ3NTbPDy31m4eQUwKW84s03z0N2C8HpOklyeaDgaJPa/TexP4/SkORMSOwc7WhKifnA6Ya33AkzmafA==",
+      "path": "system.formats.asn1/6.0.0",
+      "hashPath": "system.formats.asn1.6.0.0.nupkg.sha512"
+    },
     "System.IdentityModel.Tokens.Jwt/6.8.0": {
       "type": "package",
       "serviceable": true,
@@ -1274,6 +1336,13 @@
       "sha512": "sha512-WG3r7EyjUe9CMPFSs6bty5doUqT+q9pbI80hlNzo2SkPkZ4VTuZkGWjpp77JB8+uaL4DFPRdBsAY+DX3dBK92A==",
       "path": "system.security.cryptography.cng/4.5.0",
       "hashPath": "system.security.cryptography.cng.4.5.0.nupkg.sha512"
+    },
+    "System.Security.Cryptography.Pkcs/6.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ynmbW2GjIGg9K1wXmVIRs4IlyDolf0JXNpzFQ8JCVgwM+myUC2JeUggl2PwQig2PNVMegKmN1aAx7WPQ8tI3vA==",
+      "path": "system.security.cryptography.pkcs/6.0.1",
+      "hashPath": "system.security.cryptography.pkcs.6.0.1.nupkg.sha512"
     },
     "System.Security.Cryptography.ProtectedData/4.7.0": {
       "type": "package",
