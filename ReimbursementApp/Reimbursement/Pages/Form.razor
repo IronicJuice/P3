@@ -7,6 +7,7 @@
 @inject Mailservice Mail
 @inject PDF pdf
 @inject UserController usercontroller
+@inherits LayoutComponentBase
 
 @inject PdfData.PDF Pdf
 <PageTitle>Form</PageTitle>
@@ -25,6 +26,7 @@
 </style>
 
 <body>
+    
 <div class="content">
     <EditForm id="form" Model="@formInfo" OnValidSubmit="@HandleValidSubmit">
         <DataAnnotationsValidator />
@@ -117,7 +119,6 @@
         Logusername();
         formInfo.PopulateTextFields(formInfo, currentuserName, currentuserEmail);
         formInfo.PopulateGroups();
-        //base.OnInitialized();
     }
 
     public string currentuserName { get; set; }
@@ -139,9 +140,6 @@
         {
             Console.WriteLine("there was an error");
         }
-        User currentUser = new User(currentuserEmail, currentuserName);
-        Console.WriteLine(currentUser.EmailAddress);
-        Console.WriteLine(currentuserName);
     }
 
     private void HandleValidSubmit() 
@@ -149,10 +147,5 @@
         Pdf.GenPdf(formInfo);
         Console.WriteLine(formInfo.Cash);
         Mail.SendMail(currentuserName, currentuserEmail, formInfo.Name);
-    }
-
-    public void SendMail(){
-        //pdf.GenPdf();
-        //Mail.SendMail(currentuserName, currentuserEmail, formInfo.Name);
     }
 }

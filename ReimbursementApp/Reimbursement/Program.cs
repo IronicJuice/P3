@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-//using Reimbursement.Areas.Identity;
 using Reimbursement.Data;
 using Reimbursement.PdfData;
 
@@ -20,18 +19,8 @@ namespace Reimbursement
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            //builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseSqlServer(connectionString));
-            //builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-            //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddRazorPages();
-
             builder.Services.AddServerSideBlazor();
-            //builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
-            builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddSingleton<FormInfo>();
             builder.Services.AddSingleton<PDF>();
             builder.Services.AddSingleton<UserController>();
@@ -50,7 +39,7 @@ namespace Reimbursement
                 googleoptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
                 googleoptions.SaveTokens = true;
                 var scope = googleoptions.Scope;
-                scope.Add("https://mail.google.com/");
+                //scope.Add("https://mail.google.com/");
                 //scope.Add("https://www.googleapis.com/auth/userinfo.profile");
                 //scope.Add("https://www.googleapis.com/auth/userinfo.email");
                 scope.Add("https://www.googleapis.com/auth/gmail.send");

@@ -15,7 +15,7 @@ namespace Reimbursement.PdfData
             //Create Pdf object
             PdfDocument doc = new PdfDocument();
 
-            //Dirrect to the approciate directory
+            //Direct to the approciate directory
             string path = Directory.GetCurrentDirectory();
             doc.LoadFromFile(@path + "/PdfData/PdfForm.pdf");
 
@@ -30,6 +30,7 @@ namespace Reimbursement.PdfData
             string date = DateTime.Now.ToString("dd-MM-yyyy");
             string[] splitDate = date.Split("-");
 
+            //Adds every field from the form to a dictionary
             IDictionary<int, string?> userInputDictionary = new Dictionary<int, string>();
             userInputDictionary.Add(0, userInput.Name);
             userInputDictionary.Add(1, userInput.Phone);
@@ -65,7 +66,6 @@ namespace Reimbursement.PdfData
                     }
                 }
             }
-
             string PersonsName = userInput.Name;
             doc.SaveToFile($"PdfData/{PersonsName}.pdf", FileFormat.PDF);
 

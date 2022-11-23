@@ -13,8 +13,6 @@ namespace Reimbursement.Data
 {
     public class Mailservice : UserController
     {
-        //private string Name { get; set; }
-        //private string Email { get; set; }
         public void SendMail(string Name, string Email, string pdfName)
         {
             try
@@ -41,16 +39,9 @@ namespace Reimbursement.Data
 
                 oMail.Subject = "Udlæg";
                 oMail.TextBody = "Hej,\n\nVedhæftet er en udfyldt udlæg formular, samt billeddokumentation\n\nHilsen,\n" + pdfName;
-                
-                //Sender bare en testpdf lige nu
-                //oMail.AddAttachment(@"C:\Users\Rasmu\AAU\3. semester\TestPdf.pdf");
-                //PDF pdfdocument = new PDF();
-                //pdfdocument.GenPdf();
 
                 string path = Directory.GetCurrentDirectory();
                 oMail.AddAttachment(@path + "/PdfData/" + pdfName + ".pdf");
-                
-                
 
                 Console.WriteLine("start to send email using OAUTH 2.0 ...");
                 Console.WriteLine(UserController.token);
@@ -66,5 +57,5 @@ namespace Reimbursement.Data
                 Console.WriteLine("Exception: {0}", ep.Message);
             }
         }
-}
+    }
 }

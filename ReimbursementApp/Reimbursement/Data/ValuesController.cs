@@ -15,8 +15,7 @@ namespace Reimbursement.Data
     [ApiController]
     public class UserController : Controller
     {
-
-        // GET api/<ValuesController>/5
+        // GET api/<ValuesController>/
         [HttpGet("GoogleSignIn")]
         public async Task GoogleSignin()
         {
@@ -30,8 +29,7 @@ namespace Reimbursement.Data
         {
             token = await HttpContext.GetTokenAsync(GoogleDefaults.AuthenticationScheme, "access_token");
             Console.WriteLine(token);
-        }
-        
+        }   
     }
 }
 

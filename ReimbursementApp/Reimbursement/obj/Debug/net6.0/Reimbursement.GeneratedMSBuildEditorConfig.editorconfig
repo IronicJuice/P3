@@ -19,14 +19,6 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/xgree/Source/Repos/IronicJuice/P3/ReimbursementApp/Reimbursement/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/xgree/Source/Repos/IronicJuice/P3/ReimbursementApp/Reimbursement/Pages/FetchData.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/xgree/Source/Repos/IronicJuice/P3/ReimbursementApp/Reimbursement/Pages/Form.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRm9ybS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -50,10 +42,6 @@ build_metadata.AdditionalFiles.CssScope =
 [C:/Users/xgree/Source/Repos/IronicJuice/P3/ReimbursementApp/Reimbursement/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-qepciaaf35
-
-[C:/Users/xgree/Source/Repos/IronicJuice/P3/ReimbursementApp/Reimbursement/Shared/NavMenu.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = b-n9owvuafrv
 
 [C:/Users/xgree/Source/Repos/IronicJuice/P3/ReimbursementApp/Reimbursement/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
