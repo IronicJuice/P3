@@ -76,6 +76,10 @@
             "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
               "version": "[6.0.10, )"
+            },
+            "bunit": {
+              "target": "Package",
+              "version": "[1.12.6, )"
             }
           },
           "imports": [
