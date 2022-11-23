@@ -15,7 +15,7 @@ namespace Reimbursement.Data
     {
         //private string Name { get; set; }
         //private string Email { get; set; }
-        public void SendMail(string Name, string Email)
+        public void SendMail(string Name, string Email, string pdfName)
         {
             try
             {
@@ -37,10 +37,10 @@ namespace Reimbursement.Data
                 SmtpMail oMail = new SmtpMail("TryIt");
                 // Your gmail email address
                 oMail.From = Email;
-                oMail.To = "bredfort1234@gmail.com";
+                oMail.To = "xgreenaa@gmail.com";
 
-                oMail.Subject = "Test email sent from with microsoft asp";
-                oMail.TextBody = "this is a test email sent from c# project with gmail.";
+                oMail.Subject = "Udlæg";
+                oMail.TextBody = "Hej,\n\nVedhæftet er en udfyldt udlæg formular, samt billeddokumentation\n\nHilsen,\n" + pdfName;
                 
                 //Sender bare en testpdf lige nu
                 //oMail.AddAttachment(@"C:\Users\Rasmu\AAU\3. semester\TestPdf.pdf");
@@ -48,7 +48,7 @@ namespace Reimbursement.Data
                 //pdfdocument.GenPdf();
 
                 string path = Directory.GetCurrentDirectory();
-                oMail.AddAttachment(@path + "/PdfData/PeterWeihe.pdf");
+                oMail.AddAttachment(@path + "/PdfData/" + pdfName + ".pdf");
                 
                 
 

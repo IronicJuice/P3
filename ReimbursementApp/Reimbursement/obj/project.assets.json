@@ -3734,23 +3734,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Pætur Magnussen\\.nuget\\packages\\": {},
+    "C:\\Users\\xgree\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Pætur Magnussen\\OneDrive - Aalborg Universitet\\AAU\\3_semester\\procjekt\\P3\\ReimbursementApp\\Reimbursement\\Reimbursement.csproj",
+      "projectUniqueName": "C:\\Users\\xgree\\Source\\Repos\\IronicJuice\\P3\\ReimbursementApp\\Reimbursement\\Reimbursement.csproj",
       "projectName": "Reimbursement",
-      "projectPath": "C:\\Users\\Pætur Magnussen\\OneDrive - Aalborg Universitet\\AAU\\3_semester\\procjekt\\P3\\ReimbursementApp\\Reimbursement\\Reimbursement.csproj",
-      "packagesPath": "C:\\Users\\Pætur Magnussen\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Pætur Magnussen\\OneDrive - Aalborg Universitet\\AAU\\3_semester\\procjekt\\P3\\ReimbursementApp\\Reimbursement\\obj\\",
+      "projectPath": "C:\\Users\\xgree\\Source\\Repos\\IronicJuice\\P3\\ReimbursementApp\\Reimbursement\\Reimbursement.csproj",
+      "packagesPath": "C:\\Users\\xgree\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\xgree\\Source\\Repos\\IronicJuice\\P3\\ReimbursementApp\\Reimbursement\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Pætur Magnussen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\xgree\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3834,7 +3834,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -103,11 +103,9 @@
         </p>
         <div class="spacer"></div>
         <div align="center"></div>
-            <button type="button" class="google-login-button" onclick=@(() => SendMail())>Submit</button>
+            <button type="submit" form="form" class="google-login-button">Indsend</button>
     
     </EditForm>
-
-    <button @onclick="testFunc">Test Butan</button>
 
 </div>
 <div class="eop"></div>
@@ -117,6 +115,8 @@
     protected override async void OnInitialized()
     {
         Logusername();
+        formInfo.PopulateTextFields(formInfo, currentuserName, currentuserEmail);
+        formInfo.PopulateGroups();
         //base.OnInitialized();
     }
 
@@ -148,16 +148,11 @@
     {
         Pdf.GenPdf(formInfo);
         Console.WriteLine(formInfo.Cash);
-    }
-
-    private void testFunc() 
-    {
-        formInfo.PopulateTextFields(formInfo);
-        formInfo.PopulateGroups();
+        Mail.SendMail(currentuserName, currentuserEmail, formInfo.Name);
     }
 
     public void SendMail(){
         //pdf.GenPdf();
-        Mail.SendMail(currentuserName, currentuserEmail);
+        //Mail.SendMail(currentuserName, currentuserEmail, formInfo.Name);
     }
 }
