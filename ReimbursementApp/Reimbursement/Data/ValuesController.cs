@@ -52,7 +52,7 @@ namespace Reimbursement.Data
         {
             token = await HttpContext.GetTokenAsync(GoogleDefaults.AuthenticationScheme, "access_token");
             Console.WriteLine(token);
-
+        }
     }
 }
 
