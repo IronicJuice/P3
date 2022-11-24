@@ -7,6 +7,7 @@
 @inject Mailservice Mail
 @inject PDF pdf
 @inject UserController usercontroller
+@inject IJSRuntime JSRuntime
 @inherits LayoutComponentBase
 
 @inject PdfData.PDF Pdf
@@ -28,7 +29,7 @@
 <body>
     
 <div class="content">
-    <EditForm id="form" Model="@formInfo" OnValidSubmit="@HandleValidSubmit">
+    <EditForm id="form" Model="@formInfo" Context="formContext">
         <DataAnnotationsValidator />
         <ValidationSummary />
 
@@ -105,7 +106,10 @@
         </p>
         <div class="spacer"></div>
         <div align="center"></div>
-            <button type="submit" form="form" class="google-login-button">Indsend</button>
+            <button type="submit" form="form" class="google-login-button" @onclick="@(() => SendReimbursement(formContext))">Indsend</button>
+            <button type="submit" form="form" class="google-login-button" @onclick="@(() => PreviewPdf(formContext))">Preview</button>
+
+            <button @onclick="testThing">Test</button>
     
     </EditForm>
 
@@ -119,6 +123,10 @@
         Logusername();
         formInfo.PopulateTextFields(formInfo, currentuserName, currentuserEmail);
         formInfo.PopulateGroups();
+    }
+
+    public async void testThing() {
+        bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm", "Er du sikker på du vil sende emailen?");
     }
 
     public string currentuserName { get; set; }
@@ -142,10 +150,22 @@
         }
     }
 
-    private void HandleValidSubmit() 
-    {
-        Pdf.GenPdf(formInfo);
-        Console.WriteLine(formInfo.Cash);
-        Mail.SendMail(currentuserName, currentuserEmail, formInfo.Name);
+    public void PreviewPdf(EditContext formContext) {
+        if (formContext.Validate()) {
+            Pdf.GenPdf(formInfo);
+            Console.WriteLine(formInfo.Cash);
+        }
+    }
+
+    public async void SendReimbursement(EditContext formContext) {
+        if (formContext.Validate()) {
+            bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm", "Er du sikker på du vil sende emailen?");
+            if (confirmed)
+            {
+                Pdf.GenPdf(formInfo);
+                Console.WriteLine(formInfo.Cash);
+                Mail.SendMail(currentuserName, currentuserEmail, formInfo.Name);
+            }
+        }
     }
 }
