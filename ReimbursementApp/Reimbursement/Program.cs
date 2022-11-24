@@ -41,8 +41,14 @@ namespace Reimbursement
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultSignOutScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             }
-            ).AddCookie().
+            ).AddCookie(o =>
+            {
+                o.LoginPath = "/user/GoogleSignIn";
+                o.LogoutPath = "/user/logoutuser";
+            }
+            ).
             AddGoogle(googleoptions =>
             {
                 IConfiguration googleAuthSection = builder.Configuration.GetSection("Authentication:Google");
@@ -50,9 +56,7 @@ namespace Reimbursement
                 googleoptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
                 googleoptions.SaveTokens = true;
                 var scope = googleoptions.Scope;
-                scope.Add("https://mail.google.com/");
-                //scope.Add("https://www.googleapis.com/auth/userinfo.profile");
-                //scope.Add("https://www.googleapis.com/auth/userinfo.email");
+                scope.Add("https://www.googleapis.com/auth/userinfo.profile");
                 scope.Add("https://www.googleapis.com/auth/gmail.send");
             });
 
