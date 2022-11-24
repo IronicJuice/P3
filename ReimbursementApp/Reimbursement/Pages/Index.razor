@@ -5,18 +5,13 @@
 
 <PageTitle>Start Screen</PageTitle>
 
-<h1>Hello, Summonor!</h1>
+<h1>Velkommen</h1>
 
 <button type="button" class="google-login-button" @onclick="GoogleSignIn">Login</button> 
-
-
-<!--<SurveyPrompt Title="How is Blazor working for you?" />-->
-
 
 @code {
     public void GoogleSignIn()
     {
         _navigationmanager.NavigateTo("user/GoogleSignIn", true);
-
     }
 }

@@ -394,7 +394,6 @@ C:\Users\xgree\Source\Repos\IronicJuice\P3\ReimbursementApp\Reimbursement\obj\De
 C:\Users\xgree\Source\Repos\IronicJuice\P3\ReimbursementApp\Reimbursement\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\xgree\Source\Repos\IronicJuice\P3\ReimbursementApp\Reimbursement\obj\Debug\net6.0\staticwebassets.development.json
 C:\Users\xgree\Source\Repos\IronicJuice\P3\ReimbursementApp\Reimbursement\obj\Debug\net6.0\scopedcss\Shared\MainLayout.razor.rz.scp.css
-C:\Users\xgree\Source\Repos\IronicJuice\P3\ReimbursementApp\Reimbursement\obj\Debug\net6.0\scopedcss\Shared\NavMenu.razor.rz.scp.css
 C:\Users\xgree\Source\Repos\IronicJuice\P3\ReimbursementApp\Reimbursement\obj\Debug\net6.0\scopedcss\bundle\Reimbursement.styles.css
 C:\Users\xgree\Source\Repos\IronicJuice\P3\ReimbursementApp\Reimbursement\obj\Debug\net6.0\scopedcss\projectbundle\Reimbursement.bundle.scp.css
 C:\Users\xgree\Source\Repos\IronicJuice\P3\ReimbursementApp\Reimbursement\obj\Debug\net6.0\Reimbursement.csproj.CopyComplete

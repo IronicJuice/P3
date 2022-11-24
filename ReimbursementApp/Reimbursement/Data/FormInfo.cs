@@ -46,7 +46,6 @@ namespace Reimbursement.Data
         [RegularExpression(@"^[0-9]+$", ErrorMessage = "Kontonummer må kun indeholde tal")]
         public string? AccountNumber { get; set; }
 
-
         public void PopulateTextFields(FormInfo formInfo, string name, string email) //Autofill fields from data recieved from login
         {
             formInfo.Name = name;
@@ -99,11 +98,7 @@ namespace Reimbursement.Data
                     throw new Exception("Account is null");
                 }
             }
-
         }
-
-
-
         public List<string> GroupList = new List<string>();
         public void PopulateGroups()
         {

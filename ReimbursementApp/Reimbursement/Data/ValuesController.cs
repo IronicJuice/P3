@@ -20,6 +20,7 @@ namespace Reimbursement.Data
     [ApiController]
     public class UserController : Controller
     {
+
         //Logs out the user, and deletes the CookieAuthentication, so that the user needsd to log bac in to get access
         [HttpGet("logoutuser")]
         [Authorize]
@@ -30,6 +31,9 @@ namespace Reimbursement.Data
 
         //Signs the user in throug google login
         // GET api/<ValuesController>/5
+
+        // GET api/<ValuesController>/
+
         [HttpGet("GoogleSignIn")]
         public async Task GoogleSignin()
         {
@@ -48,7 +52,7 @@ namespace Reimbursement.Data
         {
             token = await HttpContext.GetTokenAsync(GoogleDefaults.AuthenticationScheme, "access_token");
             Console.WriteLine(token);
-        }
+
     }
 }
 
