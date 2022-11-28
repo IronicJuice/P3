@@ -102,9 +102,17 @@ namespace Reimbursement.Data
         public List<string> GroupList = new List<string>();
         public void PopulateGroups()
         {
-            GroupList.Add("EDB");
-            GroupList.Add("Silly");
-            GroupList.Add("Test3");
+            string path = Directory.GetCurrentDirectory();
+            string jsonString = File.ReadAllText(path + "/Data/accounts.json");
+            AccountClass Account = JsonSerializer.Deserialize<AccountClass>(jsonString);
+            if (Account is not null) {
+                for (int i = 0; i < Account.GroupList.Count; i++) {
+                    GroupList.Add(Account.GroupList[i].Name);
+                }
+            }
+            //GroupList.Add("EDB");
+            //GroupList.Add("Silly");
+            //GroupList.Add("Test3");
         }
     }
 }

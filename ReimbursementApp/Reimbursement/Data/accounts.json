@@ -1,17 +1,437 @@
 {
   "GroupList": [
     {
-      "Name": "EDB",
+      "Name": "Aalbar",
       "Accounts": [
-        "Something: 0693 - 1213513513",
-        "Nothing: 0000 - 0000000"
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
       ]
     },
     {
-      "Name": "Silly",
+      "Name": "AAU LGBT+",
       "Accounts": [
-        "AccountDumb: 6163 - 6426124624",
-        "ImOutOfIdeas: 4594 - 1416146124"
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "AAULAN",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Agenda",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Alkoholpolitik",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Ansvarlig for lokale studieforeninger",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "BarBaren",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Barer",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "BAS Bestyrelse",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "BasisBaren",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "BASmedlemmer",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "BEST Aalborg",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Billeder Studentersamfundet",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Budget",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Classroom Teachers",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Connect Intl.",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Covid19",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "DE medlemmer",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "DE-klubben",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "DE-klubben faktura",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "DMARC reports",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "EDB drift DK-hostmaster",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "EDB-Drift",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Eksterne",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Erhverv",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Eventansvarlig",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Festum ad Mortem",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Foreninger i Studentersamfundet",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Fredagsterapi",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Fællesrådet for Psykologi",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Google API Test",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Indvalgte 2022",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Indvalgte i råd og nævn",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Indvalgte ikke på S-ets liste i 2020",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Indvalgte ikke på Studentersamfundets liste 2019",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Indvalgte på Studentersamfundets liste 2019",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Indvalgte på Studentersamfundets liste i 2020",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Indvalgtesansvarlig",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Kahoot mail",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Kommunikationsansvarlig",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Konkurrencer ERHVERVSGRUPPEN",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Kontor-hjælp",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Layout agenda",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Lyd og Lys Admin",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Lyd og Lys iPad",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Lyd&Lys administration",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Medlem",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Opstillede til AAUVALG 2020",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Orginasitorisk næstforperson",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "SAMF",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Social Politisk ansvarlig",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Software3 External 1",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Software3 External 2",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Software3 External 3",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Sommerfesten",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Stemmeprocenter AAUvalg",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Studenterpolitisk pulje",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Studentersamfundets kasserer",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Tip Agenda",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Unirun kontakt",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "WD Ultra",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
+      ]
+    },
+    {
+      "Name": "Zoom",
+      "Accounts": [
+        "Test One: 0693 - 1213513513",
+        "Two Two: 0000 - 0000000"
       ]
     }
   ]

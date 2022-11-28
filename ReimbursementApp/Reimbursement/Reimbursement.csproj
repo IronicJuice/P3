@@ -19,6 +19,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties data_4accounts_1json__JsonSchema="https://docs.gradle.com/enterprise/admin/schema/gradle-enterprise-config-schema-5.json" /></VisualStudio></ProjectExtensions>
+
 </Project>
 
 <!--<UserSecretsId>aspnet-Reimbursement-457300CF-3A53-4D48-AA54-6C6DE338B4F9</UserSecretsId>-->
