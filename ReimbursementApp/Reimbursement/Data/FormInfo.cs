@@ -49,7 +49,6 @@ namespace Reimbursement.Data
         public void PopulateTextFields(FormInfo formInfo, string name, string email) //Autofill fields from data recieved from login
         {
             formInfo.Name = name;
-            formInfo.Phone = "112";
             formInfo.Email = email;
         }
 
@@ -99,20 +98,22 @@ namespace Reimbursement.Data
                 }
             }
         }
-        public List<string> GroupList = new List<string>();
-        public void PopulateGroups()
+        public List<string> GroupList = new List<string>(); //Create list of groups to be filled
+        public void PopulateGroups() //Populate the GroupList with information stored in accounts.json
         {
             string path = Directory.GetCurrentDirectory();
             string jsonString = File.ReadAllText(path + "/Data/accounts.json");
             AccountClass Account = JsonSerializer.Deserialize<AccountClass>(jsonString);
-            if (Account is not null) {
-                for (int i = 0; i < Account.GroupList.Count; i++) {
-                    GroupList.Add(Account.GroupList[i].Name);
+            if (Account is not null) 
+            {
+                for (int i = 0; i < Account.GroupList.Count; i++) 
+                {
+                    if (Account.GroupList[i].Name != "TestGroup") 
+                    { 
+                        GroupList.Add(Account.GroupList[i].Name); 
+                    }
                 }
             }
-            //GroupList.Add("EDB");
-            //GroupList.Add("Silly");
-            //GroupList.Add("Test3");
         }
     }
 }
