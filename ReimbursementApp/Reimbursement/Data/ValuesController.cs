@@ -40,6 +40,9 @@ namespace Reimbursement.Data
             AuthenticationProperties auth = new AuthenticationProperties()
             {
                 RedirectUri = "/form",
+                IsPersistent = true,
+                IssuedUtc = DateTimeOffset.UtcNow,
+                AllowRefresh = true,
                 ExpiresUtc = DateTime.Now.AddHours(1),
             };
             await HttpContext.ChallengeAsync(GoogleDefaults.AuthenticationScheme, auth);

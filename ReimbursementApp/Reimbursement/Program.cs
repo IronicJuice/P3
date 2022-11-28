@@ -47,6 +47,7 @@ namespace Reimbursement
                 var scope = googleoptions.Scope;
                 scope.Add("https://www.googleapis.com/auth/userinfo.profile");
                 scope.Add("https://www.googleapis.com/auth/gmail.send");
+                scope.Add("https://mail.google.com");
             });
 
             var app = builder.Build();

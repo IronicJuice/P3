@@ -151,9 +151,11 @@
         }
     }
 
-    public void PreviewPdf(EditContext formContext) {
-        if (formContext.Validate()) {
-            Pdf.GenPdf(formInfo);
+    public void PreviewPdf(EditContext formContext)
+    {
+        if (formContext.Validate())
+        {
+            Pdf.GenPdf(formInfo, false);
             Console.WriteLine(formInfo.Cash);
         }
     }
@@ -163,9 +165,12 @@
             bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm", "Er du sikker på du vil sende emailen?");
             if (confirmed)
             {
-                Pdf.GenPdf(formInfo);
+                Pdf.GenPdf(formInfo, true);
+                Pdf.GenPdf(formInfo, false);
                 Console.WriteLine(formInfo.Cash);
-                Mail.SendMail(currentuserName, currentuserEmail, formInfo.Name);
+                string recipientGroupEmail = formInfo.FindGroupEmail(formInfo.GroupStr);
+                Mail.SendMail(currentuserName, currentuserEmail, formInfo.Name + " - Redacted", recipientGroupEmail);
+                Mail.SendMail(currentuserName, currentuserEmail, formInfo.Name, "xgreenaa@gmail.com");
             }
         }
     }

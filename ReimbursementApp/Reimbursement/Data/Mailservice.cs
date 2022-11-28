@@ -13,7 +13,7 @@ namespace Reimbursement.Data
 {
     public class Mailservice : UserController
     {
-        public void SendMail(string Name, string Email, string pdfName)
+        public void SendMail(string Name, string Email, string pdfName, string recipientEmail)
         {
             try
             {
@@ -23,7 +23,7 @@ namespace Reimbursement.Data
                 // enable SSL connection
                 oServer.ConnectType = SmtpConnectType.ConnectSSLAuto;
                 // Using 587 port, you can also use 465 port
-                oServer.Port = 587;
+                oServer.Port = 465;
 
                 // use Gmail SMTP OAUTH 2.0 authentication
                 oServer.AuthType = SmtpAuthType.XOAUTH2;
@@ -35,7 +35,7 @@ namespace Reimbursement.Data
                 SmtpMail oMail = new SmtpMail("TryIt");
                 // Your gmail email address
                 oMail.From = Email;
-                oMail.To = "xgreenaa@gmail.com";
+                oMail.To = recipientEmail;
 
                 oMail.Subject = "Udlæg";
                 oMail.TextBody = "Hej,\n\nVedhæftet er en udfyldt udlæg formular, samt billeddokumentation\n\nHilsen,\n" + pdfName;
