@@ -55,10 +55,10 @@
             <label>Gruppe:</label>
                 <InputSelect @bind-Value="formInfo.GroupStr" @onclick="formInfo.PopulateAccounts" style="width: 200px;">
                 <option>Vælg en gruppe</option>
-                @for (int i = 0; i < formInfo.GroupList.Count; i++) {
-                    <option>@formInfo.GroupList[i]</option>
-                }
-            </InputSelect><br>
+                    @for (int i = 0; i < formInfo.GroupList.Count; i++) {
+                        <option>@formInfo.GroupList[i]</option>
+                    }
+                </InputSelect><br>
         </p>
         <p>
             <label>Hvad er pengene brugt på:</label>
