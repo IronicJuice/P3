@@ -11,6 +11,7 @@
 @inject IWebHostEnvironment env
 @inject FormInfo formInfo
 @inject Mailservice Mail
+@inject IJSRuntime jsRuntime
 @inject PDF pdf
 @inject UserController usercontroller
 @inject IJSRuntime JSRuntime
@@ -111,9 +112,10 @@
         <div class="spacer"></div>
         <div align="center"></div>
             <button type="submit" form="form" class="google-login-button" @onclick="@(() => SendReimbursement(formContext))">Indsend</button>
+            <NavLink href="/PdfData/PdfForm.pdf">Preview</NavLink>
             <button type="submit" form="form" class="google-login-button" @onclick="@(() => PreviewPdf(formContext))">Preview</button>
             <button type="submit" form="form" class="google-login-button">Indsend</button>
-            <button type="button" @onclick="LogOutUser">logout</button>
+            <button type="button" class="bg-secondary"  @onclick="LogOutUser">logout</button>
 
     </EditForm>
 
@@ -148,7 +150,25 @@
 <div class="eop"></div>
 </body>
 
+ 
+
+
+
+ @code {
+
+    //public async Task PreviewPdf()
+    //    {
+    //        string url =Environment.CurrentDirectory + "/Pdfdata/PdfForm.pdf";
+    //        await jsRuntime.InvokeAsync<object>("open", url, "_blank");
+    //    }
+    
+}
+
 @code{
+    protected override async Task OnInitializedAsync()
+    {
+            await ListFiles();
+    }
     protected override void OnInitialized()
     {
         Logusername();
@@ -276,10 +296,6 @@
             await InvokeAsync(StateHasChanged);
         }
 
-        protected override async Task OnInitializedAsync()
-        {
-            await ListFiles();
-        }
         async Task<string> DeleteFile(MouseEventArgs e, string url){
             Console.WriteLine(url);
             FileUrls.Clear();
