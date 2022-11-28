@@ -3,14 +3,18 @@
 @using Reimbursement.PdfData;
 @using Microsoft.AspNetCore.Components.Authorization;
 @using System.Security.Claims;
+@using Microsoft.AspNetCore.Authentication.Cookies;
 @inject FormInfo formInfo
 @inject Mailservice Mail
 @inject PDF pdf
 @inject UserController usercontroller
 @inject IJSRuntime JSRuntime
+@inject NavigationManager _navigationmanager
 @inherits LayoutComponentBase
 
+
 @inject PdfData.PDF Pdf
+
 <PageTitle>Form</PageTitle>
 
 <style>
@@ -108,6 +112,8 @@
         <div align="center"></div>
             <button type="submit" form="form" class="google-login-button" @onclick="@(() => SendReimbursement(formContext))">Indsend</button>
             <button type="submit" form="form" class="google-login-button" @onclick="@(() => PreviewPdf(formContext))">Preview</button>
+            <button type="submit" form="form" class="google-login-button">Indsend</button>
+            <button type="button" @onclick="LogOutUser">logout</button>
     </EditForm>
 
 </div>
@@ -115,7 +121,7 @@
 </body>
 
 @code{
-    protected override async void OnInitialized()
+    protected override void OnInitialized()
     {
         Logusername();
         formInfo.PopulateTextFields(formInfo, currentuserName, currentuserEmail);
@@ -128,6 +134,7 @@
     [CascadingParameter]
     public Task<AuthenticationState> authenticationStateTask { get; set; }
 
+    //Checks if the user is Authenticated, and saves the user name and emil if true, fals sends back to the start page.
     public async void Logusername()
     {
         var authstate = await authenticationStateTask;
@@ -140,6 +147,7 @@
         else
         {
             Console.WriteLine("there was an error");
+            _navigationmanager.NavigateTo("/");
         }
     }
 
@@ -160,5 +168,11 @@
                 Mail.SendMail(currentuserName, currentuserEmail, formInfo.Name);
             }
         }
+    }
+
+    //Navigates the the HTTPGET("logout") method in the controller
+    public void LogOutUser()
+    {
+        _navigationmanager.NavigateTo("user/logoutuser", true);
     }
 }
