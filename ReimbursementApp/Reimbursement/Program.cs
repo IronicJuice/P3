@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Reimbursement.Areas.Identity;
 using Reimbursement.Data;
 using Reimbursement.PdfData;
@@ -29,7 +30,6 @@ namespace Reimbursement
             builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddSingleton<FormInfo>();
             builder.Services.AddSingleton<PDF>();
-
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -47,6 +47,12 @@ namespace Reimbursement
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                   Path.Combine(Directory.GetCurrentDirectory(), "Pages/Images")),
+                RequestPath = "/Pages/Images"
+            });
 
             app.UseRouting();
 

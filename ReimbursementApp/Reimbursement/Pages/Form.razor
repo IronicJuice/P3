@@ -1,5 +1,10 @@
 ﻿@page "/form"
 @using Reimbursement.Data;
+@using System.IO;
+@using System;
+@using System.Drawing;
+@using Microsoft.AspNetCore.Components.Forms
+@inject IWebHostEnvironment env
 @inject FormInfo formInfo
 @inject PdfData.PDF Pdf
 <PageTitle>Form</PageTitle>
@@ -89,18 +94,38 @@
             <InputText @bind-Value="formInfo.AccountNumber"/><br />
         </p>
         <br />
-        <div class="spacer"></div>
-        <p>
-            <label>Vedhæft kvittering:</label>
-            <input type="file" multiple id="files" accept="image/*"  />
-        </p>
-        <div class="spacer"></div>
-        <div align="center"></div>
     </EditForm>
 
     <button @onclick="testFunc">Test Butan</button>
 
 </div>
+<h1>Vedhæft kvittering</h1>
+
+    <h3>Upload photo</h3>
+    @if (ImageUrl != "")
+    {
+        <img src="@ImageUrl" />
+        <br />
+        <br />
+    }
+    <div class="dropArea @dropClass">
+        Drag and drop photo, or click to select a local file.
+        <InputFile disabled="@Uploading" multiple
+                   OnChange="OnInputFileChange"
+                   @ondragenter="HandleDragEnter"
+                   @ondragleave="HandleDragLeave" />
+    </div>
+    <br />
+    <h3>Files</h3>
+    <ul>
+        @foreach (var url in FileUrls)
+        {
+            var i = 0;
+            <li><a href="@url">@url</a><br/></li>
+            <button class="bg-warning" @onclick="(args)=> DeleteFile(args, url)">Delete</button>
+            i++;
+        }
+    </ul>
 <div class="eop"></div>
 </body>
 
@@ -116,4 +141,89 @@
         formInfo.PopulateTextFields(formInfo);
         formInfo.PopulateGroups();
     }
+    }
+    @code {
+
+        string ImageUrl = "";
+        bool Uploading = false;
+        List<string> FileUrls = new List<string>();
+
+        // support for drag/drop
+        string dropClass = string.Empty;
+        void HandleDragEnter()
+        {
+            dropClass = "dropAreaDrug";
+        }
+        void HandleDragLeave()
+        {
+            dropClass = string.Empty;
+        }
+
+        async Task OnInputFileChange(InputFileChangeEventArgs args)
+        {
+            dropClass = string.Empty;
+
+            try
+            {
+                // disable the upload pane
+                Uploading = true;
+                await InvokeAsync(StateHasChanged);
+
+                // Resize to no more than 400x400
+                var format = "image/png";
+                var resizedImageFile = await args.File.RequestImageFileAsync(format, 600, 600);
+
+                // read resized png data into a buffer
+                var buffer = new byte[resizedImageFile.Size];
+                await resizedImageFile.OpenReadStream().ReadAsync(buffer);
+
+                // get new filename with a bit of entropy
+                string justFileName = Path.GetFileNameWithoutExtension(args.File.Name);
+                string newFileNameWithoutPath = $"{justFileName}-{DateTime.Now.Ticks.ToString()}.png";
+                string filename = $"{Environment.CurrentDirectory}\\Pages\\Images\\{newFileNameWithoutPath}";
+
+                // write the file
+                File.WriteAllBytes(filename, buffer);
+
+                ImageUrl = $"Pages/Images/{newFileNameWithoutPath}";
+
+                await ListFiles();
+
+                Uploading = false;
+
+            }
+            catch (Exception ex)
+            {
+                Uploading = false;
+                await InvokeAsync(StateHasChanged);
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                throw;
+            }
+        }
+
+        async Task ListFiles()
+        {
+            FileUrls.Clear();
+            var files = Directory.GetFiles(Environment.CurrentDirectory + "\\Pages\\Images", "*.*");
+            foreach (var filename in files)
+            {
+                var file = Path.GetFileName(filename);
+                string url = $"Pages/Images/{file}";
+                FileUrls.Add(url);
+            }
+            await InvokeAsync(StateHasChanged);
+        }
+
+        protected override async Task OnInitializedAsync()
+        {
+            await ListFiles();
+        }
+        async Task<string> DeleteFile(MouseEventArgs e, string url){
+            Console.WriteLine(url);
+            FileUrls.Clear();
+            File.Delete(Environment.CurrentDirectory+"/"+url);
+            await ListFiles();
+            await InvokeAsync(StateHasChanged);
+            return "succes";
+        }
 }
