@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reimbursement", "Reimbursement\Reimbursement.csproj", "{DBE54F67-045F-4A58-957A-2A08C584B8CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReimbursementTests", "ReimbursementTests\ReimbursementTests.csproj", "{5C3C2526-0D05-4BBF-96DD-AA7599686E1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReimbursementTests", "ReimbursementTests\ReimbursementTests.csproj", "{5C3C2526-0D05-4BBF-96DD-AA7599686E1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
