@@ -13,6 +13,13 @@
         "AccountDumb: 6163 - 6426124624",
         "ImOutOfIdeas: 4594 - 1416146124"
       ]
+    },
+    {
+      "Name": "TestGroup",
+      "Accounts": [
+        "Test1: 6163 - 6422854624",
+        "Test2: 4594 - 1416146756"
+      ]
     }
   ]
 }

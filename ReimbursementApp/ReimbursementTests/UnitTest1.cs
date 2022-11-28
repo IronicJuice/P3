@@ -44,7 +44,7 @@ namespace ReimbursementTests
         public void GroupSelectTest() {
             using var ctx = new TestContext();
             ctx.Services.AddSingleton(new PDF());
-            ctx.Services.AddSingleton(new FormInfo());
+            ctx.Services.AddSingleton<FormInfo>(new FormInfo());
             var cut = ctx.RenderComponent<Reimbursement.Pages.Form>();
 
             cut.Find("button").Click();
@@ -83,6 +83,12 @@ namespace ReimbursementTests
             formInfo.PopulateAccounts();
             Assert.Equal("AccountDumb: 6163 - 6426124624", formInfo.accountList[0]);
             Assert.Equal("ImOutOfIdeas: 4594 - 1416146124", formInfo.accountList[1]);
+
+            formInfo.GroupStr = "TestGroup";
+            formInfo.PopulateAccounts();
+            Assert.Equal("Test1: 6163 - 6422854624", formInfo.accountList[0]);
+            Assert.Equal("Test2: 4594 - 1416146756", formInfo.accountList[1]);
+
         }
         [Fact]
         public void PopulateTextFieldsTests() {
