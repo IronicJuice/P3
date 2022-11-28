@@ -46,12 +46,11 @@ namespace Reimbursement.Data
         [RegularExpression(@"^[0-9]+$", ErrorMessage = "Kontonummer må kun indeholde tal")]
         public string? AccountNumber { get; set; }
 
-
-        public void PopulateTextFields(FormInfo formInfo) //Autofill fields from data recieved from login
+        public void PopulateTextFields(FormInfo formInfo, string name, string email) //Autofill fields from data recieved from login
         {
-            formInfo.Name = "John Doe";
+            formInfo.Name = name;
             formInfo.Phone = "112";
-            formInfo.Email = "JohnDoe@gmail.com";
+            formInfo.Email = email;
         }
 
         public class AccountClass //This class is used to store the information from accounts.json
@@ -99,17 +98,21 @@ namespace Reimbursement.Data
                     throw new Exception("Account is null");
                 }
             }
-
         }
-
-
-
         public List<string> GroupList = new List<string>();
         public void PopulateGroups()
         {
-            GroupList.Add("EDB");
-            GroupList.Add("Silly");
-            GroupList.Add("Test3");
+            string path = Directory.GetCurrentDirectory();
+            string jsonString = File.ReadAllText(path + "/Data/accounts.json");
+            AccountClass Account = JsonSerializer.Deserialize<AccountClass>(jsonString);
+            if (Account is not null) {
+                for (int i = 0; i < Account.GroupList.Count; i++) {
+                    GroupList.Add(Account.GroupList[i].Name);
+                }
+            }
+            //GroupList.Add("EDB");
+            //GroupList.Add("Silly");
+            //GroupList.Add("Test3");
         }
     }
 }

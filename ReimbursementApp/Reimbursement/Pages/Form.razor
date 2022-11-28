@@ -1,7 +1,25 @@
 ﻿@page "/form"
 @using Reimbursement.Data;
+@using Reimbursement.PdfData;
+@using Microsoft.AspNetCore.Components.Authorization;
+@using System.Security.Claims;
+@using Microsoft.AspNetCore.Authentication.Cookies;
+@using System.IO;
+@using System;
+@using System.Drawing;
+@using Microsoft.AspNetCore.Components.Forms
+@inject IWebHostEnvironment env
 @inject FormInfo formInfo
+@inject Mailservice Mail
+@inject PDF pdf
+@inject UserController usercontroller
+@inject IJSRuntime JSRuntime
+@inject NavigationManager _navigationmanager
+@inherits LayoutComponentBase
+
+
 @inject PdfData.PDF Pdf
+
 <PageTitle>Form</PageTitle>
 
 <style>
@@ -18,8 +36,9 @@
 </style>
 
 <body>
+    
 <div class="content">
-    <EditForm id="form" Model="@formInfo" OnValidSubmit="@HandleValidSubmit">
+    <EditForm id="form" Model="@formInfo" Context="formContext">
         <DataAnnotationsValidator />
         <ValidationSummary />
 
@@ -41,10 +60,10 @@
             <label>Gruppe:</label>
                 <InputSelect @bind-Value="formInfo.GroupStr" @onclick="formInfo.PopulateAccounts" style="width: 200px;">
                 <option>Vælg en gruppe</option>
-                @for (int i = 0; i < formInfo.GroupList.Count; i++) {
-                    <option>@formInfo.GroupList[i]</option>
-                }
-            </InputSelect><br>
+                    @for (int i = 0; i < formInfo.GroupList.Count; i++) {
+                        <option>@formInfo.GroupList[i]</option>
+                    }
+                </InputSelect><br>
         </p>
         <p>
             <label>Hvad er pengene brugt på:</label>
@@ -90,30 +109,183 @@
         </p>
         <br />
         <div class="spacer"></div>
-        <p>
-            <label>Vedhæft kvittering:</label>
-            <input type="file" multiple id="files" accept="image/*"  />
-        </p>
-        <div class="spacer"></div>
         <div align="center"></div>
+            <button type="submit" form="form" class="google-login-button" @onclick="@(() => SendReimbursement(formContext))">Indsend</button>
+            <button type="submit" form="form" class="google-login-button" @onclick="@(() => PreviewPdf(formContext))">Preview</button>
+            <button type="submit" form="form" class="google-login-button">Indsend</button>
+            <button type="button" @onclick="LogOutUser">logout</button>
+
     </EditForm>
 
-    <button @onclick="testFunc">Test Butan</button>
-
 </div>
+<h1>Vedhæft kvittering</h1>
+
+    <h3>Upload photo</h3>
+    @if (ImageUrl != "")
+    {
+        <img src="@ImageUrl" />
+        <br />
+        <br />
+    }
+    <div class="dropArea @dropClass">
+        Drag and drop photo, or click to select a local file.
+        <InputFile disabled="@Uploading" multiple
+                   OnChange="OnInputFileChange"
+                   @ondragenter="HandleDragEnter"
+                   @ondragleave="HandleDragLeave" />
+    </div>
+    <br />
+    <h3>Files</h3>
+    <ul>
+        @foreach (var url in FileUrls)
+        {
+            var i = 0;
+            <li><a href="@url">@url</a><br/></li>
+            <button class="bg-warning" @onclick="(args)=> DeleteFile(args, url)">Delete</button>
+            i++;
+        }
+    </ul>
 <div class="eop"></div>
 </body>
 
 @code{
-
-    private void HandleValidSubmit() 
+    protected override void OnInitialized()
     {
-        Pdf.GenPdf(formInfo);
-    }
-
-    private void testFunc() 
-    {
-        formInfo.PopulateTextFields(formInfo);
+        Logusername();
+        formInfo.PopulateTextFields(formInfo, currentuserName, currentuserEmail);
         formInfo.PopulateGroups();
     }
+
+    public string currentuserName { get; set; }
+    public string currentuserEmail { get; set; }
+
+    [CascadingParameter]
+    public Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    //Checks if the user is Authenticated, and saves the user name and emil if true, fals sends back to the start page.
+    public async void Logusername()
+    {
+        var authstate = await authenticationStateTask;
+        var user = authstate.User;
+        if (user.Identity.IsAuthenticated)
+        {
+            currentuserEmail = user.FindFirstValue(ClaimTypes.Email);
+            currentuserName = user.FindFirstValue(ClaimTypes.Name);
+        }
+        else
+        {
+            Console.WriteLine("there was an error");
+            _navigationmanager.NavigateTo("/");
+        }
+    }
+
+    public void PreviewPdf(EditContext formContext) {
+        if (formContext.Validate()) {
+            Pdf.GenPdf(formInfo);
+            Console.WriteLine(formInfo.Cash);
+        }
+    }
+
+    public async void SendReimbursement(EditContext formContext) {
+        if (formContext.Validate()) {
+            bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm", "Er du sikker på du vil sende emailen?");
+            if (confirmed)
+            {
+                Pdf.GenPdf(formInfo);
+                Console.WriteLine(formInfo.Cash);
+                Mail.SendMail(currentuserName, currentuserEmail, formInfo.Name);
+            }
+        }
+    }
+
+    //Navigates the the HTTPGET("logout") method in the controller
+    public void LogOutUser()
+    {
+        _navigationmanager.NavigateTo("user/logoutuser", true);
+    }
+    }
+    @code {
+
+        string ImageUrl = "";
+        bool Uploading = false;
+        List<string> FileUrls = new List<string>();
+
+        // support for drag/drop
+        string dropClass = string.Empty;
+        void HandleDragEnter()
+        {
+            dropClass = "dropAreaDrug";
+        }
+        void HandleDragLeave()
+        {
+            dropClass = string.Empty;
+        }
+
+        async Task OnInputFileChange(InputFileChangeEventArgs args)
+        {
+            dropClass = string.Empty;
+
+            try
+            {
+                // disable the upload pane
+                Uploading = true;
+                await InvokeAsync(StateHasChanged);
+
+                // Resize to no more than 400x400
+                var format = "image/png";
+                var resizedImageFile = await args.File.RequestImageFileAsync(format, 600, 600);
+
+                // read resized png data into a buffer
+                var buffer = new byte[resizedImageFile.Size];
+                await resizedImageFile.OpenReadStream().ReadAsync(buffer);
+
+                // get new filename with a bit of entropy
+                string justFileName = Path.GetFileNameWithoutExtension(args.File.Name);
+                string newFileNameWithoutPath = $"{justFileName}-{DateTime.Now.Ticks.ToString()}.png";
+                string filename = $"{Environment.CurrentDirectory}\\Pages\\Images\\{newFileNameWithoutPath}";
+
+                // write the file
+                File.WriteAllBytes(filename, buffer);
+
+                ImageUrl = $"Pages/Images/{newFileNameWithoutPath}";
+
+                await ListFiles();
+
+                Uploading = false;
+
+            }
+            catch (Exception ex)
+            {
+                Uploading = false;
+                await InvokeAsync(StateHasChanged);
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                throw;
+            }
+        }
+
+        async Task ListFiles()
+        {
+            FileUrls.Clear();
+            var files = Directory.GetFiles(Environment.CurrentDirectory + "\\Pages\\Images", "*.*");
+            foreach (var filename in files)
+            {
+                var file = Path.GetFileName(filename);
+                string url = $"Pages/Images/{file}";
+                FileUrls.Add(url);
+            }
+            await InvokeAsync(StateHasChanged);
+        }
+
+        protected override async Task OnInitializedAsync()
+        {
+            await ListFiles();
+        }
+        async Task<string> DeleteFile(MouseEventArgs e, string url){
+            Console.WriteLine(url);
+            FileUrls.Clear();
+            File.Delete(Environment.CurrentDirectory+"/"+url);
+            await ListFiles();
+            await InvokeAsync(StateHasChanged);
+            return "succes";
+        }
 }
