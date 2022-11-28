@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.FileProviders;
 using Reimbursement.Data;
 using Reimbursement.PdfData;
 
@@ -67,6 +68,12 @@ namespace Reimbursement
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                   Path.Combine(Directory.GetCurrentDirectory(), "Pages/Images")),
+                RequestPath = "/Pages/Images"
+            });
 
             app.UseRouting();
 
