@@ -75,4 +75,8 @@ namespace ReimbursementTests
 
         }
     }
+    public class MailServiceTests
+    {
+
+    }
 }
