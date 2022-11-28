@@ -400,3 +400,5 @@ FodyWeavers.xsd
 # Ignoreing bin and obj folder
 /bin 
 /OBJ 
+/ReimbursementApp/Reimbursement/PdfData/Marcus Lau - Redacted.pdf
+/ReimbursementApp/Reimbursement/PdfData/Marcus Lau.pdf

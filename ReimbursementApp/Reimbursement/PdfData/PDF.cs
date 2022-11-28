@@ -10,7 +10,7 @@ namespace Reimbursement.PdfData
 {
     public class PDF
     {
-        public void GenPdf(FormInfo userInput)
+        public void GenPdf(FormInfo userInput, bool isRedacted)
         {
             //Create Pdf object
             PdfDocument doc = new PdfDocument();
@@ -61,14 +61,27 @@ namespace Reimbursement.PdfData
                     if (userInputDictionary[i] == null) {
                         textBox.Text = "";
                     }
+                    else if (i == 9 && isRedacted) {
+                        textBox.Text = "";
+                    }
+                    else if (i == 10 && isRedacted)
+                    {
+                        textBox.Text = "";
+                    }
                     else {
                         textBox.Text = userInputDictionary[i];
                     }
                 }
             }
             string PersonsName = userInput.Name;
-            doc.SaveToFile($"PdfData/{PersonsName}.pdf", FileFormat.PDF);
-
+            if (isRedacted)
+            {
+                doc.SaveToFile($"PdfData/{PersonsName} - Redacted.pdf", FileFormat.PDF);
+            }
+            else
+            {
+                doc.SaveToFile($"PdfData/{PersonsName}.pdf", FileFormat.PDF);
+            }
             Task.Factory.StartNew(() => {
             Thread.Sleep(60000);
             File.Delete($"PdfData/{PersonsName}.pdf");
