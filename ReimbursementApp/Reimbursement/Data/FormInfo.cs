@@ -21,7 +21,7 @@ namespace Reimbursement.Data
         public string? GroupStr { get; set; }
 
         [Required(ErrorMessage = "Hvad pengene er brugt på skal udfyldes")]
-        [RegularExpression(@"^[\p{L}0-9 ,.!@;:()]+$", ErrorMessage = "Hvad pengene er brugt på er ugyldig.")] //Maybe more characters?
+        [RegularExpression(@"^[\p{L}0-9 ,.!@;:()]+$", ErrorMessage = "Hvad pengene er brugt på er ugyldig.")]
         public string? Purpose { get; set; }
 
         [RegularExpression(@"^[\p{L}0-9,.\n() ]+$", ErrorMessage = "Deltagere ved fortæring må ikke indeholde specielle tegn.")]
@@ -35,7 +35,7 @@ namespace Reimbursement.Data
         public bool? Cash { get; set; }
 
         [Required(ErrorMessage = "Konto skal udfyldes")]
-        [RegularExpression(@"^[\p{L}0-9]+: ([0-9 -]+)+$", ErrorMessage = "Den indtastede konto er ugyldig")]
+        [RegularExpression(@"^[\p{L}0-9 ]+: ([0-9 -]+)+$", ErrorMessage = "Den indtastede konto er ugyldig")]
         public string? Account { get; set; }
 
         [Required(ErrorMessage = "Registreringsnummer skal udfyldes")]
@@ -58,6 +58,7 @@ namespace Reimbursement.Data
             public class InternalGroup
             {
                 public string? Name { get; set; }
+                public string? Email { get; set; }
                 public string[]? Accounts { get; set; }
             }
             public IList<InternalGroup>? GroupList { get; set; }
@@ -87,7 +88,6 @@ namespace Reimbursement.Data
                             for (int j = 0; j < Account.GroupList[i].Accounts.Length; j++)
                             {
                                 accountList.Add(Account.GroupList[i].Accounts[j]);
-                                Console.WriteLine(Account.GroupList[i].Accounts[j]);
                             }
                             break; //Stop looking through groups when the correct group has been found, and all accounts have been added
                         }
@@ -99,12 +99,42 @@ namespace Reimbursement.Data
                 }
             }
         }
+
+        public string FindGroupEmail(string group)
+        {
+            string? email = "";
+            //Read the JSON file containing the account information and save as string
+            string path = Directory.GetCurrentDirectory();
+            string jsonString = File.ReadAllText(path + "/Data/accounts.json");
+            if (jsonString is null)
+            {
+                throw new Exception("JsonString is null");
+            }
+            else
+            {
+                AccountClass Account = JsonSerializer.Deserialize<AccountClass>(jsonString); //The JSON string is saved as an AccountClass object
+                for (int i = 0; i < Account.GroupList.Count; i++)
+                {
+                    if (Account.GroupList[i].Name == group)
+                    {
+                        email = Account.GroupList[i].Email;
+                    }
+                }
+            }
+            return email;
+        }
+
         public List<string> GroupList = new List<string>();
         public void PopulateGroups()
         {
-            GroupList.Add("EDB");
-            GroupList.Add("Silly");
-            GroupList.Add("Test3");
+            string path = Directory.GetCurrentDirectory();
+            string jsonString = File.ReadAllText(path + "/Data/accounts.json");
+            AccountClass Account = JsonSerializer.Deserialize<AccountClass>(jsonString);
+            if (Account is not null) {
+                for (int i = 0; i < Account.GroupList.Count; i++) {
+                    GroupList.Add(Account.GroupList[i].Name);
+                }
+            }
         }
     }
 }

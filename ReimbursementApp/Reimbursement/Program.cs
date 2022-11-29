@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.FileProviders;
 using Reimbursement.Data;
 using Reimbursement.PdfData;
 
@@ -47,6 +48,7 @@ namespace Reimbursement
                 var scope = googleoptions.Scope;
                 scope.Add("https://www.googleapis.com/auth/userinfo.profile");
                 scope.Add("https://www.googleapis.com/auth/gmail.send");
+                scope.Add("https://mail.google.com");
             });
 
             var app = builder.Build();
@@ -66,6 +68,18 @@ namespace Reimbursement
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                   Path.Combine(Directory.GetCurrentDirectory(), "Pages/Images")),
+                RequestPath = "/Pages/Images"
+            });
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                  Path.Combine(Directory.GetCurrentDirectory(), "PdfData/GeneratedPdf")),
+                RequestPath = "/PdfData/GeneratedPdf"
+            });
 
             app.UseRouting();
 
