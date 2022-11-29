@@ -9,6 +9,11 @@
 
   <ItemGroup>
 
+    <None Include="wwwroot\css\StudentersamfundetLogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+
     <PackageReference Include="EASendMail" Version="7.9.0.9" />
     <PackageReference Include="BlazorInputFile" Version="0.2.0" />
     <PackageReference Include="BlazorInputFileExtended" Version="2.4.18" />

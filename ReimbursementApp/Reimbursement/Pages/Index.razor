@@ -3,11 +3,23 @@
 @inject UserController controller;
 @inject NavigationManager _navigationmanager;
 
+
 <PageTitle>Start Screen</PageTitle>
-
-<h1>Velkommen</h1>
-
-<button type="button" class="google-login-button" @onclick="GoogleSignIn">Login</button> 
+<head>
+    <link rel="stylesheet" href="/css/homepage.css">
+</head>
+<centering>
+<body>
+    <img src="/css/StudentersamfundetLogo.png" alt="stlogo" class="img" />
+    <h1>Velkommen</h1>
+        <div>
+            <center>
+                Denne sider er til at søge udlæg
+            </center>
+        </div>
+        <button type="button" class="button-Login" @onclick="GoogleSignIn">Login</button>
+    </body>
+</centering>
 
 @code {
     public void GoogleSignIn()
