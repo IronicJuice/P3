@@ -49,7 +49,6 @@ namespace Reimbursement.Data
         public void PopulateTextFields(FormInfo formInfo, string name, string email) //Autofill fields from data recieved from login
         {
             formInfo.Name = name;
-            formInfo.Phone = "112";
             formInfo.Email = email;
         }
 
