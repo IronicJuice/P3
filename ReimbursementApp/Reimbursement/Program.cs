@@ -74,6 +74,12 @@ namespace Reimbursement
                    Path.Combine(Directory.GetCurrentDirectory(), "Pages/Images")),
                 RequestPath = "/Pages/Images"
             });
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                  Path.Combine(Directory.GetCurrentDirectory(), "PdfData/GeneratedPdf")),
+                RequestPath = "/PdfData/GeneratedPdf"
+            });
 
             app.UseRouting();
 

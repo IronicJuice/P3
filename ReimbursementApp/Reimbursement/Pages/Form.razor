@@ -17,8 +17,6 @@
 @inject IJSRuntime JSRuntime
 @inject NavigationManager _navigationmanager
 @inherits LayoutComponentBase
-
-
 @inject PdfData.PDF Pdf
 
 <PageTitle>Form</PageTitle>
@@ -109,12 +107,9 @@
             <InputText @bind-Value="formInfo.AccountNumber"/><br />
         </p>
         <br />
-        <div class="spacer"></div>
         <div align="center"></div>
             <button type="submit" form="form" class="google-login-button" @onclick="@(() => SendReimbursement(formContext))">Indsend</button>
-            <NavLink href="/PdfData/PdfForm.pdf">Preview</NavLink>
-            <button type="submit" form="form" class="google-login-button" @onclick="@(() => PreviewPdf(formContext))">Preview</button>
-            <button type="submit" form="form" class="google-login-button">Indsend</button>
+            <button type="submit" form="form" class="google-login-button" @onclick="@((args) => PreviewPdf(args,formContext))">Preview</button>
             <button type="button" class="bg-secondary"  @onclick="LogOutUser">logout</button>
 
     </EditForm>
@@ -154,14 +149,20 @@
 
 
 
- @code {
+@code {
 
-    //public async Task PreviewPdf()
-    //    {
-    //        string url =Environment.CurrentDirectory + "/Pdfdata/PdfForm.pdf";
-    //        await jsRuntime.InvokeAsync<object>("open", url, "_blank");
-    //    }
-    
+    string DomainName = "https://localhost:7227";
+    public async Task<string> PreviewPdf(MouseEventArgs e, EditContext formContext)
+    {
+        {
+            Pdf.GenPdf(formInfo, false);
+            string url = DomainName + "/PdfData/GeneratedPdf/"+ pdf.PersonsName + ".pdf";
+            await jsRuntime.InvokeAsync<object>("open", url, "_blank");
+            
+
+        }
+        return "succes";
+    }
 }
 
 @code{
@@ -199,14 +200,6 @@
         }
     }
 
-    public void PreviewPdf(EditContext formContext)
-    {
-        if (formContext.Validate())
-        {
-            Pdf.GenPdf(formInfo, false);
-        }
-    }
-
     public async void SendReimbursement(EditContext formContext) {
         if (formContext.Validate()) {
             bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm", "Er du sikker på du vil sende emailen?");
@@ -215,8 +208,6 @@
                 Pdf.GenPdf(formInfo, true);
                 Pdf.GenPdf(formInfo, false);
                 string recipientGroupEmail = formInfo.FindGroupEmail(formInfo.GroupStr);
-                Mail.SendMail(currentuserName, currentuserEmail, formInfo.Name + " - Redacted", recipientGroupEmail, 587);
-                Mail.SendMail(currentuserName, currentuserEmail, formInfo.Name, "xgreenaa@gmail.com", 587);
             }
         }
     }
@@ -256,7 +247,7 @@
 
                 // Resize to no more than 400x400
                 var format = "image/png";
-                var resizedImageFile = await args.File.RequestImageFileAsync(format, 600, 600);
+                var resizedImageFile = await args.File.RequestImageFileAsync(format, 600, 400);
 
                 // read resized png data into a buffer
                 var buffer = new byte[resizedImageFile.Size];

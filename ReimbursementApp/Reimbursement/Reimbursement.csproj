@@ -22,12 +22,12 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10" />
   </ItemGroup>
 
-
-  <ProjectExtensions><VisualStudio><UserProperties data_4accounts_1json__JsonSchema="https://docs.gradle.com/enterprise/admin/schema/gradle-enterprise-config-schema-5.json" /></VisualStudio></ProjectExtensions>
-
   <ItemGroup>
     <Folder Include="Pages\Images\" />
   </ItemGroup>
+
+
+  <ProjectExtensions><VisualStudio><UserProperties data_4accounts_1json__JsonSchema="https://docs.gradle.com/enterprise/admin/schema/gradle-enterprise-config-schema-5.json" /></VisualStudio></ProjectExtensions>
 
 
 </Project>
