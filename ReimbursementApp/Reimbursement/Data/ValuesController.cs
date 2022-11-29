@@ -30,7 +30,7 @@ namespace Reimbursement.Data
         }
 
         //Signs the user in throug google login
-        // GET api/<ValuesController>/5
+        // GET api/<ValuesController>/
 
         // GET api/<ValuesController>/
 

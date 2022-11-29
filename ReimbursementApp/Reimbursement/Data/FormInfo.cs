@@ -21,7 +21,7 @@ namespace Reimbursement.Data
         public string? GroupStr { get; set; }
 
         [Required(ErrorMessage = "Hvad pengene er brugt på skal udfyldes")]
-        [RegularExpression(@"^[\p{L}0-9 ,.!@;:()]+$", ErrorMessage = "Hvad pengene er brugt på er ugyldig.")] //Maybe more characters?
+        [RegularExpression(@"^[\p{L}0-9 ,.!@;:()]+$", ErrorMessage = "Hvad pengene er brugt på er ugyldig.")]
         public string? Purpose { get; set; }
 
         [RegularExpression(@"^[\p{L}0-9,.\n() ]+$", ErrorMessage = "Deltagere ved fortæring må ikke indeholde specielle tegn.")]
@@ -121,8 +121,7 @@ namespace Reimbursement.Data
                     }
                 }
             }
-
-                return email;
+            return email;
         }
 
         public List<string> GroupList = new List<string>();
@@ -136,9 +135,6 @@ namespace Reimbursement.Data
                     GroupList.Add(Account.GroupList[i].Name);
                 }
             }
-            //GroupList.Add("EDB");
-            //GroupList.Add("Silly");
-            //GroupList.Add("Test3");
         }
     }
 }

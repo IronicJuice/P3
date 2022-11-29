@@ -13,7 +13,7 @@ namespace Reimbursement.Data
 {
     public class Mailservice : UserController
     {
-        public void SendMail(string Name, string Email, string pdfName, string recipientEmail)
+        public void SendMail(string Name, string Email, string pdfName, string recipientEmail, int port)
         {
             try
             {
@@ -23,8 +23,7 @@ namespace Reimbursement.Data
                 // enable SSL connection
                 oServer.ConnectType = SmtpConnectType.ConnectSSLAuto;
                 // Using 587 port, you can also use 465 port
-                oServer.Port = 465;
-
+                oServer.Port = port;
                 // use Gmail SMTP OAUTH 2.0 authentication
                 oServer.AuthType = SmtpAuthType.XOAUTH2;
                 // set user authentication
@@ -38,7 +37,7 @@ namespace Reimbursement.Data
                 oMail.To = recipientEmail;
 
                 oMail.Subject = "Udlæg";
-                oMail.TextBody = "Hej,\n\nVedhæftet er en udfyldt udlæg formular, samt billeddokumentation\n\nHilsen,\n" + pdfName;
+                oMail.TextBody = "Hej,\n\nVedhæftet er en udfyldt udlæg formular, samt billeddokumentation\n\nHilsen,\n" + Name;
 
                 string path = Directory.GetCurrentDirectory();
                 oMail.AddAttachment(@path + "/PdfData/" + pdfName + ".pdf");
@@ -49,12 +48,16 @@ namespace Reimbursement.Data
                 SmtpClient oSmtp = new SmtpClient();
                 oSmtp.SendMail(oServer, oMail);
 
+                Console.WriteLine("Port: " + port);
                 Console.WriteLine("The email has been submitted to server successfully!");
 
             }
             catch (Exception ep)
             {
                 Console.WriteLine("Exception: {0}", ep.Message);
+                if (port == 587) {
+                    SendMail(Name, Email, pdfName, recipientEmail, 465);
+                }
             }
         }
     }
