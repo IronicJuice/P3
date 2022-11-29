@@ -155,13 +155,17 @@
     public async Task<string> PreviewPdf(MouseEventArgs e, EditContext formContext)
     {
         {
-            Pdf.GenPdf(formInfo, false);
-            string url = DomainName + "/PdfData/GeneratedPdf/"+ pdf.PersonsName + ".pdf";
-            await jsRuntime.InvokeAsync<object>("open", url, "_blank");
-            
+            if (formContext.Validate()) {
+                Pdf.GenPdf(formInfo, false);
+                string url = DomainName + "/PdfData/GeneratedPdf/"+ pdf.PersonsName + ".pdf";
+                await jsRuntime.InvokeAsync<object>("open", url, "_blank");
 
+                return "succes";
+            }
+            else {
+                return "failure";
+            }
         }
-        return "succes";
     }
 }
 
