@@ -39,22 +39,22 @@ namespace Reimbursement.Data
         {
             AuthenticationProperties auth = new AuthenticationProperties()
             {
-                RedirectUri = "/form",
+                RedirectUri = "user/gettoken",
                 IsPersistent = true,
                 IssuedUtc = DateTimeOffset.UtcNow,
                 AllowRefresh = true,
                 ExpiresUtc = DateTime.Now.AddHours(1),
             };
             await HttpContext.ChallengeAsync(GoogleDefaults.AuthenticationScheme, auth);
-            GetToken();
         }
         public static string token { get; set; }
 
-        [HttpGet]
-        public async void GetToken()
+        [HttpGet("gettoken")]
+        public async Task<ActionResult> GetToken()
         {
             token = await HttpContext.GetTokenAsync(GoogleDefaults.AuthenticationScheme, "access_token");
             Console.WriteLine(token);
+            return Redirect("/form");
         }
     }
 }
