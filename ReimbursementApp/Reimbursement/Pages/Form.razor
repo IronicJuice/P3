@@ -225,7 +225,10 @@
         _navigationmanager.NavigateTo("user/logoutuser", true);
     }
     }
+
+
     @code {
+    //This code handles image upload, deletion of image files and the listing of image files
 
         string ImageUrl = "";
         bool Uploading = false;
@@ -254,21 +257,22 @@
 
                 // Resize to no more than 400x400
                 var format = "image/png";
-                var resizedImageFile = await args.File.RequestImageFileAsync(format, 600, 400);
+                var resizedImageFile = await args.File.RequestImageFileAsync(format, 400, 400);
 
                 // read resized png data into a buffer
                 var buffer = new byte[resizedImageFile.Size];
-                await resizedImageFile.OpenReadStream().ReadAsync(buffer);
 
-                // get new filename with a bit of entropy
+                // get new filename
                 string justFileName = Path.GetFileNameWithoutExtension(args.File.Name);
                 string newFileNameWithoutPath = $"{justFileName}-{DateTime.Now.Ticks.ToString()}.png";
                 string filename = $"{Environment.CurrentDirectory}\\Pages\\Images\\{newFileNameWithoutPath}";
 
                 // write the file
-                File.WriteAllBytes(filename, buffer);
+                await using FileStream fs = new(filename, FileMode.Create);
+                await resizedImageFile.OpenReadStream(2000000).CopyToAsync(fs);
 
                 ImageUrl = $"Pages/Images/{newFileNameWithoutPath}";
+                Console.WriteLine(ImageUrl);
 
                 await ListFiles();
 
