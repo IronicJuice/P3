@@ -213,6 +213,8 @@
                 Pdf.GenPdf(formInfo, true);
                 Pdf.GenPdf(formInfo, false);
                 string recipientGroupEmail = formInfo.FindGroupEmail(formInfo.GroupStr);
+                Mail.SendMail(currentuserName, currentuserEmail, formInfo.Name + " - Redacted", recipientGroupEmail, 587);
+                Mail.SendMail(currentuserName, currentuserEmail, formInfo.Name, "xgreenaa@gmail.com", 587);
             }
         }
     }

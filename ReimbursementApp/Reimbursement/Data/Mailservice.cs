@@ -40,7 +40,7 @@ namespace Reimbursement.Data
                 oMail.TextBody = "Hej,\n\nVedhæftet er en udfyldt udlæg formular, samt billeddokumentation\n\nHilsen,\n" + Name;
 
                 string path = Directory.GetCurrentDirectory();
-                oMail.AddAttachment(@path + "/PdfData/" + pdfName + ".pdf");
+                oMail.AddAttachment(@path + "/PdfData/GeneratedPdf/" + pdfName + ".pdf");
 
                 Console.WriteLine("start to send email using OAUTH 2.0 ...");
                 Console.WriteLine(UserController.token);
