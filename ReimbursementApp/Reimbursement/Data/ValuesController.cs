@@ -2,17 +2,24 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Server.HttpSys;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Primitives;
-using Microsoft.IdentityModel.Tokens;
-using System.Reflection;
-using System.Security.Claims;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+/*********** NOT USED. DELETE LATER **********/
+//using Microsoft.AspNetCore.Components.Authorization;
+//using Microsoft.AspNetCore.CookiePolicy;
+//using Microsoft.AspNetCore.Server.HttpSys;
+//using Microsoft.EntityFrameworkCore;
+//using Microsoft.Extensions.Primitives;
+//using Microsoft.IdentityModel.Tokens;
+//using System.Reflection;
+//using System.Security.Claims;
+
+
+/*
+ * This controller class waits and listens for incoming request. If the infomcing request matches the 
+ * incoming requst, it then executes the method attachd the the request. The requst possible are [HttpGet("requstName")]
+ * When the requst has been handels the respons is then to redirecd to a new site.
+ */
 
 namespace Reimbursement.Data
 {
@@ -29,11 +36,7 @@ namespace Reimbursement.Data
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme, new AuthenticationProperties { RedirectUri = "/" });
         }
 
-        //Signs the user in throug google login
-        // GET api/<ValuesController>/
-
-        // GET api/<ValuesController>/
-
+        //Signs the user in with use of google login, and navigates to get the token after.
         [HttpGet("GoogleSignIn")]
         public async Task GoogleSignin()
         {
@@ -49,6 +52,7 @@ namespace Reimbursement.Data
         }
         public static string token { get; set; }
 
+        //Gets the token for the current use, stors it and then redirect to "form" site.
         [HttpGet("gettoken")]
         public async Task<ActionResult> GetToken()
         {
