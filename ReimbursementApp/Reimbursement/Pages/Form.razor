@@ -171,6 +171,7 @@
 }
 
 @code{
+    //Runs this method on the Initialization
     protected override async Task OnInitializedAsync()
     {
             await ListFiles();
@@ -185,7 +186,7 @@
     [CascadingParameter]
     public Task<AuthenticationState> authenticationStateTask { get; set; }
 
-    //Checks if the user is Authenticated, and saves the user name and emil if true, fals sends back to the start page.
+    //Checks if the user is Authenticated, and saves the user name and emil if true, falis sends back to the start page.
     public async void Logusername()
     {
         var authstate = await authenticationStateTask;
@@ -202,6 +203,7 @@
         }
     }
 
+    //starts the processe to send the reimburstments. It first generates the pdf, and then sends the email.
     public async void SendReimbursement(EditContext formContext) {
         if (formContext.Validate()) {
             bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm", "Er du sikker på du vil sende emailen?");
@@ -216,7 +218,7 @@
         }
     }
 
-    //Navigates the the HTTPGET("logout") method in the controller
+    //Navigates the the HTTPGET("logout") method in the controller and logs the user out
     public void LogOutUser()
     {
         _navigationmanager.NavigateTo("user/logoutuser", true);

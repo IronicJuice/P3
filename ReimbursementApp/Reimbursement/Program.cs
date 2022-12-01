@@ -1,5 +1,10 @@
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.FileProviders;
+using Reimbursement.Data;
+using Reimbursement.PdfData;
+
+/******** MAYBE DELETE UNUSED ********/
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
@@ -8,9 +13,6 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using Microsoft.Extensions.FileProviders;
-using Reimbursement.Data;
-using Reimbursement.PdfData;
 
 namespace Reimbursement
 {
@@ -22,22 +24,30 @@ namespace Reimbursement
 
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
+
+            //Coment here
             builder.Services.AddSingleton<FormInfo>();
             builder.Services.AddSingleton<PDF>();
             builder.Services.AddSingleton<UserController>();
             builder.Services.AddSingleton<Mailservice>();
+
             builder.Services.AddControllersWithViews();
 
+            //Adds the authentication that will be used in the system
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultSignOutScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             }
+            //The system uses cookie to authinticate then it is added here
             ).AddCookie(o =>
             {
                 o.LoginPath = "/user/GoogleSignIn";
                 o.LogoutPath = "/user/logoutuser";
             }
+            /*The sysem has external authitication, and is provided by Google. The client 
+             Id and Secret is stored in the file "appsetnins" and can be change to match
+            a new google workspace. The scopes are added aswell here to get acces to the nssary stuff.*/ 
             ).
             AddGoogle(googleoptions =>
             {
@@ -48,7 +58,6 @@ namespace Reimbursement
                 var scope = googleoptions.Scope;
                 scope.Add("https://www.googleapis.com/auth/userinfo.profile");
                 scope.Add("https://www.googleapis.com/auth/gmail.send");
-                scope.Add("https://mail.google.com");
             });
 
             var app = builder.Build();
