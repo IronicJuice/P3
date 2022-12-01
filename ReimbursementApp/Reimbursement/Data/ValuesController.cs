@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Reimbursement.Model;
+using System.Security.Claims;
+using System.Xml.Linq;
 
 /*********** NOT USED. DELETE LATER **********/
 //using Microsoft.AspNetCore.Components.Authorization;
@@ -42,7 +45,7 @@ namespace Reimbursement.Data
         {
             AuthenticationProperties auth = new AuthenticationProperties()
             {
-                RedirectUri = "user/gettoken",
+                RedirectUri = "user/storeuser",
                 IsPersistent = true,
                 IssuedUtc = DateTimeOffset.UtcNow,
                 AllowRefresh = true,
@@ -58,6 +61,24 @@ namespace Reimbursement.Data
         {
             token = await HttpContext.GetTokenAsync(GoogleDefaults.AuthenticationScheme, "access_token");
             Console.WriteLine(token);
+            return Redirect("user/storeuser");
+        }
+
+        [HttpGet("storeuser")]
+        public async Task<ActionResult> StoreUser()
+        {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                User currentUser = new User();
+                currentUser.Id = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                currentUser.Name = HttpContext.User.FindFirstValue(ClaimTypes.Name);
+                currentUser.Email = HttpContext.User.FindFirstValue(ClaimTypes.Email);
+                currentUser.token = await HttpContext.GetTokenAsync(GoogleDefaults.AuthenticationScheme, "access_token");
+                Console.WriteLine(currentUser.Id);
+                Console.WriteLine(currentUser.Name);
+                Console.WriteLine(currentUser.Email);
+                Console.WriteLine(currentUser.token);
+            }
             return Redirect("/form");
         }
     }
