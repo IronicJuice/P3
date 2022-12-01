@@ -146,12 +146,10 @@
 <div class="eop"></div>
 </body>
 
- 
-
-
 
 @code {
-
+    // Handles Url redirection for preview and generates a pdf of preview
+    // Remember to change domain name for implementation
     string DomainName = "https://localhost:7227";
     public async Task<string> PreviewPdf(MouseEventArgs e, EditContext formContext)
     {
@@ -244,7 +242,7 @@
             dropClass = string.Empty;
         }
 
-        // 
+        // Handles uploading pictures for one picture at a time
         async Task OnInputFileChange(InputFileChangeEventArgs args)
         {
             dropClass = string.Empty;
