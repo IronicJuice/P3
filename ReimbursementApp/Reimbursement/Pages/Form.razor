@@ -174,12 +174,9 @@
     protected override async Task OnInitializedAsync()
     {
             await ListFiles();
-    }
-    protected override void OnInitialized()
-    {
-        Logusername();
-        formInfo.PopulateTextFields(formInfo, currentuserName, currentuserEmail);
-        formInfo.PopulateGroups();
+            Logusername();
+            formInfo.PopulateTextFields(formInfo, currentuserName, currentuserEmail);
+            formInfo.PopulateGroups();
     }
 
     public string currentuserName { get; set; }
@@ -234,7 +231,7 @@
         bool Uploading = false;
         List<string> FileUrls = new List<string>();
 
-        // support for drag/drop
+        // support for drag and drop
         string dropClass = string.Empty;
         void HandleDragEnter()
         {
@@ -245,6 +242,7 @@
             dropClass = string.Empty;
         }
 
+        // 
         async Task OnInputFileChange(InputFileChangeEventArgs args)
         {
             dropClass = string.Empty;
@@ -255,23 +253,23 @@
                 Uploading = true;
                 await InvokeAsync(StateHasChanged);
 
-                // Resize to no more than 400x400
+                // Resize to 600x600
                 var format = "image/png";
-                var resizedImageFile = await args.File.RequestImageFileAsync(format, 400, 400);
+                var resizedImageFile = await args.File.RequestImageFileAsync(format, 600, 600);
 
                 // read resized png data into a buffer
-                var buffer = new byte[resizedImageFile.Size];
+                //var buffer = new byte[resizedImageFile.Size];
 
-                // get new filename
-                string justFileName = Path.GetFileNameWithoutExtension(args.File.Name);
-                string newFileNameWithoutPath = $"{justFileName}-{DateTime.Now.Ticks.ToString()}.png";
-                string filename = $"{Environment.CurrentDirectory}\\Pages\\Images\\{newFileNameWithoutPath}";
+                // get new unique filename
+                string fileName = Path.GetFileNameWithoutExtension(args.File.Name);
+                string newfileNameWithoutPath = $"{fileName}-{DateTime.Now.Ticks.ToString()}.png";
+                string filename = $"{Environment.CurrentDirectory}\\Pages\\Images\\{newfileNameWithoutPath}";
 
                 // write the file
                 await using FileStream fs = new(filename, FileMode.Create);
                 await resizedImageFile.OpenReadStream(2000000).CopyToAsync(fs);
 
-                ImageUrl = $"Pages/Images/{newFileNameWithoutPath}";
+                ImageUrl = $"Pages/Images/{newfileNameWithoutPath}";
                 Console.WriteLine(ImageUrl);
 
                 await ListFiles();
@@ -288,6 +286,7 @@
             }
         }
 
+        // update FileUrls list
         async Task ListFiles()
         {
             FileUrls.Clear();
@@ -301,6 +300,7 @@
             await InvokeAsync(StateHasChanged);
         }
 
+        //Delete a file
         async Task<string> DeleteFile(MouseEventArgs e, string url){
             Console.WriteLine(url);
             FileUrls.Clear();
