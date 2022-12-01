@@ -17,7 +17,7 @@ namespace Reimbursement.PdfData
             //Create Pdf object
             PdfDocument doc = new PdfDocument();
 
-            //Direct to the approciate directory
+            //Direct to the appropriate directory
             string path = Directory.GetCurrentDirectory();
             doc.LoadFromFile(@path + "/PdfData/PdfForm.pdf");
 
@@ -31,6 +31,9 @@ namespace Reimbursement.PdfData
 
             string date = DateTime.Now.ToString("dd-MM-yyyy");
             string[] splitDate = date.Split("-");
+
+            // Time after completetion before the generated PDF's are deleted in miliseconds  
+            int DeletePdfTimer = 600000; 
 
             //Adds every field from the form to a dictionary
             IDictionary<int, string?> userInputDictionary = new Dictionary<int, string>();
@@ -84,8 +87,10 @@ namespace Reimbursement.PdfData
             {
                 doc.SaveToFile($"PdfData/GeneratedPdf/{PersonsName}.pdf", FileFormat.PDF);
             }
+
+            //Deletes the saved pdf's after 10 min
             Task.Factory.StartNew(() => {
-            Thread.Sleep(60000);
+            Thread.Sleep(DeletePdfTimer);
             File.Delete($"PdfData/GeneratedPdf/{PersonsName}.pdf");
             File.Delete($"PdfData/GeneratedPdf/{PersonsName} - Redacted.pdf");
             });
