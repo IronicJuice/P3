@@ -172,14 +172,15 @@
     //Runs this task on the Initialization
     protected override async Task OnInitializedAsync()
     {
-            await ListFiles();
-            Logusername();
-            formInfo.PopulateTextFields(formInfo, currentuserName, currentuserEmail);
-            formInfo.PopulateGroups();
+        await ListFiles();
+        Logusername();
+        formInfo.PopulateTextFields(formInfo, currentuserName, currentuserEmail);
+        formInfo.PopulateGroups();
     }
 
     public string currentuserName { get; set; }
     public string currentuserEmail { get; set; }
+    public string currentuserIdentifier { get; set; }
 
     [CascadingParameter]
     public Task<AuthenticationState> authenticationStateTask { get; set; }
@@ -193,6 +194,7 @@
         {
             currentuserEmail = user.FindFirstValue(ClaimTypes.Email);
             currentuserName = user.FindFirstValue(ClaimTypes.Name);
+            currentuserIdentifier = user.FindFirstValue(ClaimTypes.NameIdentifier);
         }
         else
         {
@@ -210,8 +212,14 @@
                 Pdf.GenPdf(formInfo, true);
                 Pdf.GenPdf(formInfo, false);
                 string recipientGroupEmail = formInfo.FindGroupEmail(formInfo.GroupStr);
-                Mail.SendMail(currentuserName, currentuserEmail, formInfo.Name + " - Redacted", recipientGroupEmail, 587);
-                Mail.SendMail(currentuserName, currentuserEmail, formInfo.Name, "xgreenaa@gmail.com", 587);
+                Mail.SendMail(currentuserName, currentuserEmail, currentuserIdentifier, formInfo.Name + " - Redacted", recipientGroupEmail, 587);
+                Mail.SendMail(currentuserName, currentuserEmail, currentuserIdentifier, formInfo.Name, "xgreenaa@gmail.com", 587);
+                string imageFolderDir = $"{Environment.CurrentDirectory}/Pages/Images/{currentuserIdentifier}";
+                string[] imageDirectoryList = Directory.GetFiles(imageFolderDir);
+                for (int i = 0; i < imageDirectoryList.Length; i++) {
+                    File.Delete(imageDirectoryList[i]);
+                }
+                LogOutUser();
             }
         }
     }
@@ -261,15 +269,16 @@
                 //var buffer = new byte[resizedImageFile.Size];
 
                 // get new unique filename
+                System.IO.Directory.CreateDirectory($"{Environment.CurrentDirectory}\\Pages\\Images\\{currentuserIdentifier}");
                 string fileName = Path.GetFileNameWithoutExtension(args.File.Name);
                 string newfileNameWithoutPath = $"{fileName}-{DateTime.Now.Ticks.ToString()}.png";
-                string filename = $"{Environment.CurrentDirectory}\\Pages\\Images\\{newfileNameWithoutPath}";
+                string filename = $"{Environment.CurrentDirectory}\\Pages\\Images\\{currentuserIdentifier}\\{newfileNameWithoutPath}";
 
                 // write the file
                 await using FileStream fs = new(filename, FileMode.Create);
                 await resizedImageFile.OpenReadStream(2000000).CopyToAsync(fs);
 
-                ImageUrl = $"Pages/Images/{newfileNameWithoutPath}";
+                ImageUrl = $"Pages/Images/{currentuserIdentifier}/{newfileNameWithoutPath}";
                 Console.WriteLine(ImageUrl);
 
                 await ListFiles();
@@ -290,11 +299,11 @@
         async Task ListFiles()
         {
             FileUrls.Clear();
-            var files = Directory.GetFiles(Environment.CurrentDirectory + "\\Pages\\Images", "*.*");
+            var files = Directory.GetFiles(Environment.CurrentDirectory + $"\\Pages\\Images\\{currentuserIdentifier}", "*.*");
             foreach (var filename in files)
             {
                 var file = Path.GetFileName(filename);
-                string url = $"Pages/Images/{file}";
+                string url = $"Pages/Images/{currentuserIdentifier}/{file}";
                 FileUrls.Add(url);
             }
             await InvokeAsync(StateHasChanged);
