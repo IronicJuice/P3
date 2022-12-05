@@ -15,7 +15,7 @@ using System.Transactions;
 
 namespace ReimbursementTests
 {
-    public class RazerRender
+    public class TestingIndexPage
         {
         [Fact]
         public void TestingIndexMatches()
