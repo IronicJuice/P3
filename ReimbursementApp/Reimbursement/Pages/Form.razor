@@ -153,17 +153,14 @@
     string DomainName = "https://localhost:7227";
     public async Task<string> PreviewPdf(MouseEventArgs e, EditContext formContext)
     {
-        {
-            if (formContext.Validate()) {
-                Pdf.GenPdf(formInfo, false);
-                string url = DomainName + "/PdfData/GeneratedPdf/"+ pdf.PersonsName + ".pdf";
-                await jsRuntime.InvokeAsync<object>("open", url, "_blank");
-
-                return "succes";
-            }
-            else {
-                return "failure";
-            }
+        if (formContext.Validate()) {
+            Pdf.GenPdf(formInfo, false);
+            string url = DomainName + "/PdfData/GeneratedPdf/"+ pdf.PersonsName + ".pdf";
+            await jsRuntime.InvokeAsync<object>("open", url, "_blank");
+            return "succes";
+        }
+        else {
+            return "failure";
         }
     }
 }
