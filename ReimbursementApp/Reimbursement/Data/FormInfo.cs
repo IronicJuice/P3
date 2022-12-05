@@ -131,7 +131,10 @@ namespace Reimbursement.Data
             AccountClass Account = JsonSerializer.Deserialize<AccountClass>(jsonString);
             if (Account is not null) {
                 for (int i = 0; i < Account.GroupList.Count; i++) {
-                    GroupList.Add(Account.GroupList[i].Name);
+                    if (Account.GroupList[i].Name != "TestGroup")
+                    {
+                        GroupList.Add(Account.GroupList[i].Name);
+                    }
                 }
             }
         }

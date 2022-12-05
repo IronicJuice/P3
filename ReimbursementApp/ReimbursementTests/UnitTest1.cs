@@ -97,8 +97,9 @@ namespace ReimbursementTests
             Assert.Null(formInfo.Name);
             Assert.Null(formInfo.Phone);
             Assert.Null(formInfo.Email);
-
-            formInfo.PopulateTextFields(formInfo);
+            string user = "testUser";
+            string email = "q@xq.com";
+            formInfo.PopulateTextFields(formInfo, user, email);
             Assert.Equal("John Doe", formInfo.Name);
             Assert.Equal("112", formInfo.Phone);
             Assert.Equal("JohnDoe@gmail.com", formInfo.Email);

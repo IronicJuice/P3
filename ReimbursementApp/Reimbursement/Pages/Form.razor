@@ -209,15 +209,15 @@
             bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm", "Er du sikker på du vil sende emailen?");
             if (confirmed)
             {
-                Pdf.GenPdf(formInfo, true);
-                Pdf.GenPdf(formInfo, false);
+                Pdf.GenPdf(formInfo, true); //Create a redacted pdf
+                Pdf.GenPdf(formInfo, false); //Create an unredacted pdf
                 string recipientGroupEmail = formInfo.FindGroupEmail(formInfo.GroupStr);
                 Mail.SendMail(currentuserName, currentuserEmail, currentuserIdentifier, formInfo.Name + " - Redacted", recipientGroupEmail, 587);
                 Mail.SendMail(currentuserName, currentuserEmail, currentuserIdentifier, formInfo.Name, "xgreenaa@gmail.com", 587);
                 string imageFolderDir = $"{Environment.CurrentDirectory}/Pages/Images/{currentuserIdentifier}";
                 string[] imageDirectoryList = Directory.GetFiles(imageFolderDir);
                 for (int i = 0; i < imageDirectoryList.Length; i++) {
-                    File.Delete(imageDirectoryList[i]);
+                    File.Delete(imageDirectoryList[i]); //Delete the images that are attached to the email
                 }
                 LogOutUser();
             }
