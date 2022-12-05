@@ -1,4 +1,5 @@
 ﻿@page "/form"
+@attribute [Authorize]
 @using Reimbursement.Data;
 @using Reimbursement.PdfData;
 @using Microsoft.AspNetCore.Components.Authorization;
@@ -8,12 +9,9 @@
 @using System;
 @using System.Drawing;
 @using Microsoft.AspNetCore.Components.Forms
-@inject IWebHostEnvironment env
 @inject FormInfo formInfo
 @inject Mailservice Mail
 @inject IJSRuntime jsRuntime
-@inject PDF pdf
-@inject UserController usercontroller
 @inject IJSRuntime JSRuntime
 @inject NavigationManager _navigationmanager
 @inherits LayoutComponentBase
@@ -156,7 +154,7 @@
         {
             if (formContext.Validate()) {
                 Pdf.GenPdf(formInfo, false);
-                string url = DomainName + "/PdfData/GeneratedPdf/"+ pdf.PersonsName + ".pdf";
+                string url = DomainName + "/PdfData/GeneratedPdf/"+ Pdf.PersonsName + ".pdf";
                 await jsRuntime.InvokeAsync<object>("open", url, "_blank");
 
                 return "succes";
