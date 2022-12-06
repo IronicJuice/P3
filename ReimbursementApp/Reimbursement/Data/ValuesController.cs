@@ -4,16 +4,6 @@ using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-/*********** NOT USED. DELETE LATER **********/
-//using Microsoft.AspNetCore.Components.Authorization;
-//using Microsoft.AspNetCore.CookiePolicy;
-//using Microsoft.AspNetCore.Server.HttpSys;
-//using Microsoft.EntityFrameworkCore;
-//using Microsoft.Extensions.Primitives;
-//using Microsoft.IdentityModel.Tokens;
-//using System.Reflection;
-//using System.Security.Claims;
-
 
 /*
  * This controller class waits and listens for incoming request. If the infomcing request matches the 
@@ -28,7 +18,7 @@ namespace Reimbursement.Data
     public class UserController : Controller
     {
 
-        //Logs out the user, and deletes the CookieAuthentication, so that the user needsd to log bac in to get access
+        //Logs out the user, and deletes the CookieAuthentication, so that the user needs to log back in to get access
         [HttpGet("logoutuser")]
         [Authorize]
         public async Task LogOutUser()
@@ -52,7 +42,7 @@ namespace Reimbursement.Data
         }
         public static string token { get; set; }
 
-        //Gets the token for the current use, stors it and then redirect to "form" site.
+        //Gets the token for the current use, stors it and then redirects to "form" site.
         [HttpGet("gettoken")]
         public async Task<ActionResult> GetToken()
         {

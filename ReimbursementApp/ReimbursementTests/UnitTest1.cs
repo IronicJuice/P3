@@ -28,7 +28,7 @@ namespace ReimbursementTests
             inputList[2].MarkupMatches("<input class=\"valid\"  >");
 
             cut.Find("select").MarkupMatches("<select  style=\"width: 200px;\" class=\"valid\"  >" +
-                "<option>Vælg en gruppe</option");
+                "<option>VÃ¦lg en gruppe</option");
 
             cut.Find("button").Click();
 
@@ -38,7 +38,7 @@ namespace ReimbursementTests
             inputList[2].MarkupMatches("<input class=\"valid\" value=\"JohnDoe@gmail.com\"  >");
 
             cut.Find("select").MarkupMatches("<select  style=\"width: 200px;\" class=\"valid\"  >" +
-                "<option>Vælg en gruppe</option>" +
+                "<option>VÃ¦lg en gruppe</option>" +
                 "<option>EDB</option>" +
                 "<option>Silly</option>" +
                 "<option>Test3</option>" +
@@ -98,9 +98,11 @@ namespace ReimbursementTests
             Assert.Null(formInfo.Name);
             Assert.Null(formInfo.Phone);
             Assert.Null(formInfo.Email);
+
             string userName = "John Doe";
             string email = "JohnDoe@gmail.com";
             formInfo.PopulateTextFields(formInfo, userName, email);
+
             Assert.Equal("John Doe", formInfo.Name);
             Assert.Equal(null, formInfo.Phone);
             Assert.Equal("JohnDoe@gmail.com", formInfo.Email);

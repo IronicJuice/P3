@@ -157,26 +157,25 @@
     string DomainName = "https://localhost:7227";
     public async Task<string> PreviewPdf(MouseEventArgs e, EditContext formContext)
     {
-        {
-            if (formContext.Validate()) {
-                Pdf.GenPdf(formInfo, false);
-                string url = DomainName + "/PdfData/GeneratedPdf/"+ Pdf.PersonsName + ".pdf";
-                await jsRuntime.InvokeAsync<object>("open", url, "_blank");
-
-                return "succes";
-            }
-            else {
-                return "failure";
-            }
+        if (formContext.Validate()) {
+            Pdf.GenPdf(formInfo, false);
+            string url = DomainName + "/PdfData/GeneratedPdf/"+ pdf.PersonsName + ".pdf";
+            await jsRuntime.InvokeAsync<object>("open", url, "_blank");
+            return "succes";
+        }
+        else {
+            return "failure";
         }
     }
 }
 
 @code{
+
     //Initilaziing values for the current user claims and the auth state.
     bool isAuthenticated = false;
     public string currentuserName { get; set; }
     public string currentuserEmail { get; set; }
+    public string currentuserIdentifier { get; set; }
 
     //Runs this task on the Initialization
     protected override async Task OnParametersSetAsync()
@@ -205,11 +204,17 @@
             bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm", "Er du sikker på du vil sende emailen?");
             if (confirmed)
             {
-                Pdf.GenPdf(formInfo, true);
-                Pdf.GenPdf(formInfo, false);
+                Pdf.GenPdf(formInfo, true); //Create a redacted pdf
+                Pdf.GenPdf(formInfo, false); //Create an unredacted pdf
                 string recipientGroupEmail = formInfo.FindGroupEmail(formInfo.GroupStr);
-                Mail.SendMail(currentuserName, currentuserEmail, formInfo.Name + " - Redacted", recipientGroupEmail, 587);
-                Mail.SendMail(currentuserName, currentuserEmail, formInfo.Name, "xgreenaa@gmail.com", 587);
+                Mail.SendMail(currentuserName, currentuserEmail, currentuserIdentifier, formInfo.Name + " - Redacted", recipientGroupEmail, 587);
+                Mail.SendMail(currentuserName, currentuserEmail, currentuserIdentifier, formInfo.Name, "xgreenaa@gmail.com", 587);
+                string imageFolderDir = $"{Environment.CurrentDirectory}/Pages/Images/{currentuserIdentifier}";
+                string[] imageDirectoryList = Directory.GetFiles(imageFolderDir);
+                for (int i = 0; i < imageDirectoryList.Length; i++) {
+                    File.Delete(imageDirectoryList[i]); //Delete the images that are attached to the email
+                }
+                LogOutUser();
             }
         }
     }
@@ -262,43 +267,31 @@
             //var buffer = new byte[resizedImageFile.Size];
 
             // get new unique filename
+            System.IO.Directory.CreateDirectory($"{Environment.CurrentDirectory}\\Pages\\Images\\{currentuserIdentifier}");
             string fileName = Path.GetFileNameWithoutExtension(args.File.Name);
             string newfileNameWithoutPath = $"{fileName}-{DateTime.Now.Ticks.ToString()}.png";
-            string filename = $"{Environment.CurrentDirectory}\\Pages\\Images\\{newfileNameWithoutPath}";
+            string filename = $"{Environment.CurrentDirectory}\\Pages\\Images\\{currentuserIdentifier}\\{newfileNameWithoutPath}";
 
             // write the file
             await using FileStream fs = new(filename, FileMode.Create);
             await resizedImageFile.OpenReadStream(2000000).CopyToAsync(fs);
 
-            ImageUrl = $"Pages/Images/{newfileNameWithoutPath}";
+            ImageUrl = $"Pages/Images/{currentuserIdentifier}/{newfileNameWithoutPath}";
             Console.WriteLine(ImageUrl);
 
             await ListFiles();
 
             Uploading = false;
-
         }
         catch (Exception ex)
         {
-            Uploading = false;
-            await InvokeAsync(StateHasChanged);
-            System.Diagnostics.Debug.WriteLine(ex.Message);
-            throw;
-        }
-    }
+            FileUrls.Clear();
+            var files = Directory.GetFiles(Environment.CurrentDirectory + $"\\Pages\\Images\\{currentuserIdentifier}", "*.*");
 
-    //Update FileUrls list
-    async Task ListFiles()
-    {
-        FileUrls.Clear();
-        //var path = AppDomain.CurrentDomain.BaseDirectory + @"\\..\\..";
-        //Console.WriteLine(path);
-        var files = Directory.GetFiles(Environment.CurrentDirectory + "\\Pages\\Images", "*.*");
-        //var files = Directory.GetFiles(path +"\\Pages\\Images", "*.*");
             foreach (var filename in files)
             {
                 var file = Path.GetFileName(filename);
-                string url = $"Pages/Images/{file}";
+                string url = $"Pages/Images/{currentuserIdentifier}/{file}";
                 FileUrls.Add(url);
             }
             await InvokeAsync(StateHasChanged);
