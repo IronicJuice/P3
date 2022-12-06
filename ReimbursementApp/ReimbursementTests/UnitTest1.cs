@@ -5,6 +5,7 @@ using Reimbursement.PdfData;
 using Reimbursement.Data;
 using Spire.Pdf.Graphics;
 using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
+using Bunit.TestDoubles;
 
 namespace ReimbursementTests
 {
@@ -14,8 +15,11 @@ namespace ReimbursementTests
         public void TestButanTest()
         {
             using var ctx = new TestContext();
+            var authcontex = ctx.AddTestAuthorization();
+            authcontex.SetAuthorized("John Doe");
             ctx.Services.AddSingleton(new PDF());
             ctx.Services.AddSingleton(new FormInfo());
+            ctx.Services.AddSingleton(new Mailservice());
             var cut = ctx.RenderComponent<Reimbursement.Pages.Form>();
 
             var inputList = cut.FindAll("input");
@@ -24,7 +28,7 @@ namespace ReimbursementTests
             inputList[2].MarkupMatches("<input class=\"valid\"  >");
 
             cut.Find("select").MarkupMatches("<select  style=\"width: 200px;\" class=\"valid\"  >" +
-                "<option>Vælg en gruppe</option");
+                "<option>VÃ¦lg en gruppe</option");
 
             cut.Find("button").Click();
 
@@ -34,7 +38,7 @@ namespace ReimbursementTests
             inputList[2].MarkupMatches("<input class=\"valid\" value=\"JohnDoe@gmail.com\"  >");
 
             cut.Find("select").MarkupMatches("<select  style=\"width: 200px;\" class=\"valid\"  >" +
-                "<option>Vælg en gruppe</option>" +
+                "<option>VÃ¦lg en gruppe</option>" +
                 "<option>EDB</option>" +
                 "<option>Silly</option>" +
                 "<option>Test3</option>" +
@@ -43,7 +47,10 @@ namespace ReimbursementTests
         [Fact]
         public void GroupSelectTest() {
             using var ctx = new TestContext();
+            var authcontex = ctx.AddTestAuthorization();
+            authcontex.SetAuthorized("John Doe");
             ctx.Services.AddSingleton(new PDF());
+            ctx.Services.AddSingleton(new Mailservice());
             ctx.Services.AddSingleton<FormInfo>(new FormInfo());
             var cut = ctx.RenderComponent<Reimbursement.Pages.Form>();
 
@@ -59,8 +66,11 @@ namespace ReimbursementTests
         [Fact]
         public void IdkTest() {
             using var ctx = new TestContext();
+            var authcontex = ctx.AddTestAuthorization();
+            authcontex.SetAuthorized("John Doe");
             ctx.Services.AddSingleton(new PDF());
             ctx.Services.AddSingleton(new FormInfo());
+            ctx.Services.AddSingleton(new Mailservice());
             var cut = ctx.RenderComponent<Reimbursement.Pages.Form>();
 
             //Find out how to read from the same instance of the class that the razor page interacts with (if even possible)
@@ -74,15 +84,6 @@ namespace ReimbursementTests
             FormInfo formInfo = new FormInfo();
 
             Assert.Empty(formInfo.accountList);
-            formInfo.GroupStr = "EDB";
-            formInfo.PopulateAccounts();
-            Assert.Equal("Something: 0693 - 1213513513", formInfo.accountList[0]);
-            Assert.Equal("Nothing: 0000 - 0000000", formInfo.accountList[1]);
-
-            formInfo.GroupStr = "Silly";
-            formInfo.PopulateAccounts();
-            Assert.Equal("AccountDumb: 6163 - 6426124624", formInfo.accountList[0]);
-            Assert.Equal("ImOutOfIdeas: 4594 - 1416146124", formInfo.accountList[1]);
 
             formInfo.GroupStr = "TestGroup";
             formInfo.PopulateAccounts();
@@ -97,11 +98,13 @@ namespace ReimbursementTests
             Assert.Null(formInfo.Name);
             Assert.Null(formInfo.Phone);
             Assert.Null(formInfo.Email);
-            string user = "testUser";
-            string email = "q@xq.com";
-            formInfo.PopulateTextFields(formInfo, user, email);
+
+            string userName = "John Doe";
+            string email = "JohnDoe@gmail.com";
+            formInfo.PopulateTextFields(formInfo, userName, email);
+
             Assert.Equal("John Doe", formInfo.Name);
-            Assert.Equal("112", formInfo.Phone);
+            Assert.Equal(null, formInfo.Phone);
             Assert.Equal("JohnDoe@gmail.com", formInfo.Email);
         }
         [Fact]
@@ -111,9 +114,9 @@ namespace ReimbursementTests
             Assert.Empty(formInfo.GroupList);
 
             formInfo.PopulateGroups();
-            Assert.Equal("EDB", formInfo.GroupList[0]);
-            Assert.Equal("Silly", formInfo.GroupList[1]);
-            Assert.Equal("Test3", formInfo.GroupList[2]);
+            Assert.Equal("Aalbar", formInfo.GroupList[0]);
+            Assert.Equal("AAU LGBT+", formInfo.GroupList[1]);
+            Assert.Equal("AAULAN", formInfo.GroupList[2]);
         }
     }
 }
