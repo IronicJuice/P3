@@ -236,6 +236,8 @@
     string ImageUrl = "";
     bool Uploading = false;
     List<string> FileUrls = new List<string>();
+    long maxFileSize = 20000;
+    long currentFileSize = 0;
 
     // support for drag and drop
     string dropClass = string.Empty;
@@ -252,43 +254,51 @@
     async Task OnInputFileChange(InputFileChangeEventArgs args)
     {
         dropClass = string.Empty;
-
-        try
+        if (maxFileSize > currentFileSize)
         {
-            // disable the upload pane
-            Uploading = true;
-            await InvokeAsync(StateHasChanged);
+            try
+            {
+                // disable the upload pane
+                Uploading = true;
+                await InvokeAsync(StateHasChanged);
 
-            // Resize to 600x600
-            var format = "image/png";
-            var resizedImageFile = await args.File.RequestImageFileAsync(format, 600, 600);
+                // Resize to 600x600
+                var format = "image/png";
+                var resizedImageFile = await args.File.RequestImageFileAsync(format, 600, 600);
 
-            // read resized png data into a buffer
-            //var buffer = new byte[resizedImageFile.Size];
+                // read resized png data into a buffer
+                //var buffer = new byte[resizedImageFile.Size];
 
-            // get new unique filename
-            System.IO.Directory.CreateDirectory($"{Environment.CurrentDirectory}\\Pages\\Images\\{currentuserIdentifier}");
-            string fileName = Path.GetFileNameWithoutExtension(args.File.Name);
-            string newfileNameWithoutPath = $"{fileName}-{DateTime.Now.Ticks.ToString()}.png";
-            string filename = $"{Environment.CurrentDirectory}\\Pages\\Images\\{currentuserIdentifier}\\{newfileNameWithoutPath}";
+                // get new unique filename
+                System.IO.Directory.CreateDirectory($"{Environment.CurrentDirectory}\\Pages\\Images\\{currentuserIdentifier}");
+                string fileName = Path.GetFileNameWithoutExtension(args.File.Name);
+                string newfileNameWithoutPath = $"{fileName}-{DateTime.Now.Ticks.ToString()}.png";
+                string filename = $"{Environment.CurrentDirectory}\\Pages\\Images\\{currentuserIdentifier}\\{newfileNameWithoutPath}";
 
-            // write the file
-            await using FileStream fs = new(filename, FileMode.Create);
-            await resizedImageFile.OpenReadStream(2000000).CopyToAsync(fs);
+                // write the file
+                await using FileStream fs = new(filename, FileMode.Create);
+                await resizedImageFile.OpenReadStream(2000000).CopyToAsync(fs);
 
-            ImageUrl = $"Pages/Images/{currentuserIdentifier}/{newfileNameWithoutPath}";
-            Console.WriteLine(ImageUrl);
+                ImageUrl = $"Pages/Images/{currentuserIdentifier}/{newfileNameWithoutPath}";
+                currentFileSize += resizedImageFile.Size;
+                Console.WriteLine(ImageUrl);
+                Console.WriteLine(currentFileSize);
 
-            await ListFiles();
+                await ListFiles();
 
-            Uploading = false;
+                Uploading = false;
+            }
+            catch (Exception ex)
+            {
+                Uploading = false;
+                await InvokeAsync(StateHasChanged);
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                throw;
+            }
         }
-        catch (Exception ex)
-        {
-            Uploading = false;
-            await InvokeAsync(StateHasChanged);
-            System.Diagnostics.Debug.WriteLine(ex.Message);
-            throw;
+        else{
+            await JSRuntime.InvokeVoidAsync("alert", "Warning!"); // Alert
+
         }
     }
 
@@ -312,11 +322,15 @@
     //Delete a file
     async Task<string> DeleteFile(MouseEventArgs e, string url)
     {
+        long tempFileSize = 0;
         Console.WriteLine(url);
         FileUrls.Clear();
+        var tempFile = File.ReadAllBytes(Environment.CurrentDirectory + "/" + url);
         File.Delete(Environment.CurrentDirectory + "/" + url);
         await ListFiles();
         await InvokeAsync(StateHasChanged);
+        currentFileSize -= tempFile.Length;
+        Console.WriteLine(currentFileSize);
         return "succes";
     }
 }
