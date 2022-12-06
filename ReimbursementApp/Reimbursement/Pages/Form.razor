@@ -159,7 +159,7 @@
     {
         if (formContext.Validate()) {
             Pdf.GenPdf(formInfo, false);
-            string url = DomainName + "/PdfData/GeneratedPdf/"+ pdf.PersonsName + ".pdf";
+            string url = DomainName + "/PdfData/GeneratedPdf/"+ Pdf.PersonsName + ".pdf";
             await jsRuntime.InvokeAsync<object>("open", url, "_blank");
             return "succes";
         }
@@ -230,7 +230,7 @@
     }
 
 
-    @code {
+@code {
     //This code handles image upload, deletion of image files and the listing of image files
 
     string ImageUrl = "";
@@ -285,25 +285,38 @@
         }
         catch (Exception ex)
         {
-            FileUrls.Clear();
-            var files = Directory.GetFiles(Environment.CurrentDirectory + $"\\Pages\\Images\\{currentuserIdentifier}", "*.*");
-
-            foreach (var filename in files)
-            {
-                var file = Path.GetFileName(filename);
-                string url = $"Pages/Images/{currentuserIdentifier}/{file}";
-                FileUrls.Add(url);
-            }
+            Uploading = false;
             await InvokeAsync(StateHasChanged);
+            System.Diagnostics.Debug.WriteLine(ex.Message);
+            throw;
         }
+    }
 
-        //Delete a file
-        async Task<string> DeleteFile(MouseEventArgs e, string url){
-            Console.WriteLine(url);
-            FileUrls.Clear();
-            File.Delete(Environment.CurrentDirectory+"/"+url);
-            await ListFiles();
-            await InvokeAsync(StateHasChanged);
-            return "succes";
+    //Update FileUrls list
+    async Task ListFiles()
+    {
+        FileUrls.Clear();
+        //var path = AppDomain.CurrentDomain.BaseDirectory + @"\\..\\..";
+        //Console.WriteLine(path);
+        var files = Directory.GetFiles(Environment.CurrentDirectory + $"\\Pages\\Images\\{currentuserIdentifier}", "*.*");
+        //var files = Directory.GetFiles(path +"\\Pages\\Images", "*.*");
+        foreach (var filename in files)
+        {
+            var file = Path.GetFileName(filename);
+            string url = $"Pages/Images/{currentuserIdentifier}/{file}";
+            FileUrls.Add(url);
         }
+        await InvokeAsync(StateHasChanged);
+    }
+
+    //Delete a file
+    async Task<string> DeleteFile(MouseEventArgs e, string url)
+    {
+        Console.WriteLine(url);
+        FileUrls.Clear();
+        File.Delete(Environment.CurrentDirectory + "/" + url);
+        await ListFiles();
+        await InvokeAsync(StateHasChanged);
+        return "succes";
+    }
 }
