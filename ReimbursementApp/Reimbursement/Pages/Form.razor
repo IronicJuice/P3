@@ -188,7 +188,7 @@
             currentuserName = state.User.FindFirstValue(ClaimTypes.Name);
             currentuserEmail = state.User.FindFirstValue(ClaimTypes.Email);
 
-            //List the filese picture that the user has
+            //List the files picture that the user has
             await ListFiles();
 
             //Poplate the text and groups fields
@@ -198,7 +198,7 @@
     }
 
 
-    //starts the processe to send the reimburstments. It first generates the pdf, and then sends the email.
+    //starts the process to send the reimburstments. It first generates the pdf, and then sends the email.
     public async void SendReimbursement(EditContext formContext) {
         if (formContext.Validate()) {
             bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm", "Er du sikker på du vil sende emailen?");
