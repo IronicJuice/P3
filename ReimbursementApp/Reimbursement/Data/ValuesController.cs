@@ -14,16 +14,17 @@ using Microsoft.AspNetCore.Mvc;
 namespace Reimbursement.Data
 {
     [Route("[controller]")]
-    [ApiController]
     public class UserController : Controller
     {
-
         //Logs out the user, and deletes the CookieAuthentication, so that the user needs to log back in to get access
         [HttpGet("logoutuser")]
         [Authorize]
         public async Task LogOutUser()
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme, new AuthenticationProperties { RedirectUri = "/" });
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme, new AuthenticationProperties
+            { 
+                RedirectUri = "/" 
+            });
         }
 
         //Signs the user in with use of google login, and navigates to get the token after.
@@ -33,9 +34,6 @@ namespace Reimbursement.Data
             AuthenticationProperties auth = new AuthenticationProperties()
             {
                 RedirectUri = "user/gettoken",
-                IsPersistent = true,
-                IssuedUtc = DateTimeOffset.UtcNow,
-                AllowRefresh = true,
                 ExpiresUtc = DateTime.Now.AddHours(1),
             };
             await HttpContext.ChallengeAsync(GoogleDefaults.AuthenticationScheme, auth);
