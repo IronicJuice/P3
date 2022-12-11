@@ -1,13 +1,18 @@
 ﻿@page "/"
 @using Reimbursement.Data;
+@inherits LayoutComponentBase
 @inject NavigationManager _navigationmanager;
 
 
 <PageTitle>Start Screen</PageTitle>
+<!--
 <head>
     <link rel="stylesheet" href="/css/homepage.css">
 </head>
-<centering>
+-->
+
+<link rel="stylesheet" href="/css/homepage.css">
+
 <body>
     <img src="/css/StudentersamfundetLogo.png" alt="stlogo" class="img" />
     <h1>Velkommen</h1>
@@ -17,8 +22,8 @@
             </center>
         </div>
         <button type="button" class="button-Login" @onclick="GoogleSignIn">Login</button>
-    </body>
-</centering>
+</body>
+
 
 @code {
     //Navigats to [HttpGet("GoogleSignIn")] method in the usercontroller
