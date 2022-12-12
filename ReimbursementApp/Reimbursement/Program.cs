@@ -45,9 +45,9 @@ namespace Reimbursement
                 o.LoginPath = "/user/GoogleSignIn";
                 o.LogoutPath = "/user/logoutuser";
             }
-            /*The sysem has external authitication, and is provided by Google. The client 
-             Id and Secret is stored in the file "appsetnins" and can be change to match
-            a new google workspace. The scopes are added aswell here to get acces to the nssary stuff.*/ 
+            /*The sysem has external authitication, that is provided by Google. The client 
+             Id and Secret is stored in the file "appsettings" and can be change to match
+            a new google workspace. The scopes are added aswell here to get access to the necessary stuff.*/
             ).
             AddGoogle(googleoptions =>
             {
