@@ -21,7 +21,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.FileProviders;
 using Reimbursement;
 
-namespace ReimbursementTests
+namespace ReimbursementTests.UnitTest
 {
     public class TestForAutheraztion
     {
@@ -32,7 +32,7 @@ namespace ReimbursementTests
             using var ctx = new TestContext();
             var authcontext = ctx.AddTestAuthorization();
 
-            ctx.Services.AddSingleton(new PDF());
+            ctx.Services.AddSingleton(new Reimbursement.PdfData.PDF());
             ctx.Services.AddSingleton(new Mailservice());
             ctx.Services.AddSingleton(new FormInfo());
 
@@ -53,7 +53,7 @@ namespace ReimbursementTests
             var authcontext = ctx.AddTestAuthorization();
             authcontext.SetAuthorized("Test User");
 
-            ctx.Services.AddSingleton(new PDF());
+            ctx.Services.AddSingleton(new Reimbursement.PdfData.PDF());
             ctx.Services.AddSingleton(new Mailservice());
             ctx.Services.AddSingleton(new FormInfo());
 
@@ -65,37 +65,13 @@ namespace ReimbursementTests
         }
 
         [Fact]
-        public void AuthAccesFormAndClaims()
-        {
-            //Arange
-            var ctx = new TestContext();
-            var authcontext = ctx.AddTestAuthorization();
-
-            ctx.Services.AddSingleton(new PDF());
-            ctx.Services.AddSingleton(new Mailservice());
-            ctx.Services.AddSingleton(new FormInfo());
-
-            authcontext.SetAuthorized("TEST USER");
-            authcontext.SetClaims(new Claim(ClaimTypes.Email, "Test@test.com"));
-
-            //act
-            var cut = ctx.RenderComponent<Form>();
-
-            //Assert
-            var inputList = cut.FindAll("input");
-            inputList[0].MarkupMatches("<input class=\"valid\" value=\"TEST USER\"  >");
-            inputList[1].MarkupMatches("<input class=\"valid\"  >");
-            inputList[2].MarkupMatches("<input class=\"valid\" value=\"Test@test.com\"  >");
-        }
-
-        [Fact]
         public void LogOutButtonNavigatToIndex()
         {
             //Arange
             using var ctx = new TestContext();
             var authcontext = ctx.AddTestAuthorization();
             authcontext.SetAuthorized("Test User");
-            ctx.Services.AddSingleton(new PDF());
+            ctx.Services.AddSingleton(new Reimbursement.PdfData.PDF());
             ctx.Services.AddSingleton(new Mailservice());
             ctx.Services.AddSingleton(new FormInfo());
 

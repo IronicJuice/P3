@@ -16,10 +16,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Transactions;
 
 
-namespace ReimbursementTests
+namespace ReimbursementTests.UnitTest
 {
     public class TestingIndexPage
-        {
+    {
         [Fact]
         public void TestingIndexMatches()
         {
@@ -42,11 +42,13 @@ namespace ReimbursementTests
             var cut = ctx.RenderComponent<Reimbursement.Pages.Index>();
 
             //Act
+            string oldUrl = navMan.Uri;
             cut.Find("button").Click();
 
             //Assert
-            Assert.Equal("http://localhost/user/GoogleSignIn", navMan.Uri);
-        } 
+            Assert.Equal("http://localhost/", oldUrl); //The previos uri befor button clickd
+            Assert.Equal("http://localhost/user/GoogleSignIn", navMan.Uri); // new uri after button click
+        }
 
     }
 }
