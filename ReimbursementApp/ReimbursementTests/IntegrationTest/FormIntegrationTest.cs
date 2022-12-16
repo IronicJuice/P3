@@ -1,20 +1,22 @@
-﻿using System;
+﻿using System.Security.Claims;
+using Bunit;
+using Bunit.TestDoubles;
+using Reimbursement.Pages;
+using Reimbursement.PdfData;
+using Microsoft.Extensions.DependencyInjection;
+using Reimbursement.Data;
+
+//**********************************************
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Authorization;
-using System.Security.Claims;
 using System.Globalization;
-using Bunit;
-using Bunit.TestDoubles;
-using Reimbursement.Pages;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Transactions;
-using Reimbursement.PdfData;
-using Microsoft.Extensions.DependencyInjection;
-using Reimbursement.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Builder;
@@ -59,7 +61,7 @@ namespace ReimbursementTests.IntegrationTest
 
             ctx.Services.AddSingleton(new PDF());
             ctx.Services.AddSingleton(new Mailservice());
-            ctx.Services.AddSingleton(new FormInfo())
+            ctx.Services.AddSingleton(new FormInfo());
 
             authcontext.SetAuthorized("TEST USER");
 

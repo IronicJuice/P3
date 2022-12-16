@@ -76,13 +76,15 @@ namespace ReimbursementTests.UnitTest
             ctx.Services.AddSingleton(new FormInfo());
 
             var navMan = ctx.Services.GetRequiredService<FakeNavigationManager>();
-            var cut = ctx.RenderComponent<Form>();
+            var cut = ctx.RenderComponent<Reimbursement.Pages.Form>();
 
             //Act
+            string oldUrl = navMan.Uri;
             cut.Find("button").Click();
 
             //Assert
-            Assert.Equal("http://localhost/", navMan.Uri);
+            Assert.Equal("http://localhost/form", oldUrl); //The previos uri befor button clickd
+            Assert.Equal("http://localhost/user/logoutuser", navMan.Uri);
         }
     }
 }
