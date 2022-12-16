@@ -21,7 +21,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.FileProviders;
 using Reimbursement;
 
-namespace ReimbursementTests
+namespace ReimbursementTests.UnitTest
 {
     public class TestForAutheraztion
     {
@@ -32,7 +32,7 @@ namespace ReimbursementTests
             using var ctx = new TestContext();
             var authcontext = ctx.AddTestAuthorization();
 
-            ctx.Services.AddSingleton(new PDF());
+            ctx.Services.AddSingleton(new Reimbursement.PdfData.PDF());
             ctx.Services.AddSingleton(new Mailservice());
             ctx.Services.AddSingleton(new FormInfo());
 
@@ -53,7 +53,7 @@ namespace ReimbursementTests
             var authcontext = ctx.AddTestAuthorization();
             authcontext.SetAuthorized("Test User");
 
-            ctx.Services.AddSingleton(new PDF());
+            ctx.Services.AddSingleton(new Reimbursement.PdfData.PDF());
             ctx.Services.AddSingleton(new Mailservice());
             ctx.Services.AddSingleton(new FormInfo());
 
@@ -65,27 +65,26 @@ namespace ReimbursementTests
         }
 
         [Fact]
-        public void AuthAccesFormAndClaims()
+        public void LogOutButtonNavigatToIndex()
         {
             //Arange
-            var ctx = new TestContext();
+            using var ctx = new TestContext();
             var authcontext = ctx.AddTestAuthorization();
-
-            ctx.Services.AddSingleton(new PDF());
+            authcontext.SetAuthorized("Test User");
+            ctx.Services.AddSingleton(new Reimbursement.PdfData.PDF());
             ctx.Services.AddSingleton(new Mailservice());
             ctx.Services.AddSingleton(new FormInfo());
 
-            authcontext.SetAuthorized("TEST USER");
-            authcontext.SetClaims(new Claim(ClaimTypes.Email, "Test@test.com"));
+            var navMan = ctx.Services.GetRequiredService<FakeNavigationManager>();
+            var cut = ctx.RenderComponent<Reimbursement.Pages.Form>();
 
-            //act
-            var cut = ctx.RenderComponent<Form>();
+            //Act
+            string oldUrl = navMan.Uri;
+            cut.Find("button").Click();
 
             //Assert
-            var inputList = cut.FindAll("input");
-            inputList[0].MarkupMatches("<input class=\"valid\" value=\"TEST USER\"  >");
-            inputList[1].MarkupMatches("<input class=\"valid\"  >");
-            inputList[2].MarkupMatches("<input class=\"valid\" value=\"Test@test.com\"  >");
+            Assert.Equal("http://localhost/form", oldUrl); //The previos uri befor button clickd
+            Assert.Equal("http://localhost/user/logoutuser", navMan.Uri);
         }
     }
 }

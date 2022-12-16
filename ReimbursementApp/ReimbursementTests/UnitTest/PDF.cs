@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ReimbursementTests
+namespace ReimbursementTests.UnitTest
 {
-    internal class NavigationManager
+    internal class PDF
     {
     }
 }
