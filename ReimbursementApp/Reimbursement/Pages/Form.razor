@@ -297,7 +297,7 @@
             }
         }
         else{
-            await JSRuntime.InvokeVoidAsync("alert", "Warning!"); // Alert
+            await JSRuntime.InvokeVoidAsync("alert", $"Warning! the total filesize is to large currentfilesize:{currentFileSize}  maxfilesize: {maxFileSize}"); // Alert
 
         }
     }
