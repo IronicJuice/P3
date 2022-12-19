@@ -6,6 +6,7 @@ the form itself. A user must be part of the Google workspace to gain access.
 
 
 ----------------------------------------------------------------get it running---------------------------------------------------------------
+
 To be able to use the program you need to replace the current workspace with your own or request persmission to be added to the users
 authorised to log in.
 
@@ -14,8 +15,10 @@ or you can replace the client secret and id in appsetting.json
 
 ------------------------------------------------------------------- Email ------------------------------------------------------------------
 
-you will need to replace the mail in line 211
+You will need to replace the mail in line 211:
 Mail.SendMail(currentuserName, currentuserEmail, currentuserIdentifier, formInfo.Name, "example@gmail.com", 587);
+to be able to recieve the unredacted pdf
 
+in Data.account.json for the groups you will need to input the wanted mail for each group instead of example@gmail.com
 
 
