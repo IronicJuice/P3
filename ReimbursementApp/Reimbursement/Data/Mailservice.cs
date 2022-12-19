@@ -12,7 +12,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Reimbursement.Data
 {
-    public class Mailservice : UserController
+    public class Mailservice
     {
         public void SendMail(string Name, string Email, string userIdentifier, string pdfName, string recipientEmail, int port)
         {
