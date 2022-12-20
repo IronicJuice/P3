@@ -13,6 +13,8 @@ authorised to log in.
 you can request for authorisation via cs-22-sw-3-11@student.aau.dk
 or you can replace the client secret and id in appsetting.json
 
+You need to add a directory called Images in the Pages directory "Images" is case sensitive.
+
 ------------------------------------------------------------------- Email ------------------------------------------------------------------
 
 You will need to replace the mail in line 211:
