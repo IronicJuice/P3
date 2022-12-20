@@ -79,11 +79,10 @@ namespace ReimbursementTests.UnitTest
             var cut = ctx.RenderComponent<Reimbursement.Pages.Form>();
 
             //Act
-            string oldUrl = navMan.Uri;
-            cut.Find("button").Click();
+            var ButtonList = cut.FindAll("button");
+            ButtonList[2].Click();
 
             //Assert
-            Assert.Equal("http://localhost/form", oldUrl); //The previos uri befor button clickd
             Assert.Equal("http://localhost/user/logoutuser", navMan.Uri);
         }
     }
